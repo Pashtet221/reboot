@@ -202,7 +202,7 @@ if ( empty($video) ) {
   --shadow: 0 18px 50px rgba(15,23,42,.10);
   --radius: 18px;
 
-  --accent: #7B67F0;
+  --accent: #4d3bfe;
 
   padding: clamp(22px, 3vw, 48px) 0;
 }
@@ -721,7 +721,7 @@ if ( empty($video) ) {
   --minus: #ef4444;
   --plus: #22c55e;
 
-  --accent: #7B67F0; /* если хочешь — как в hero */
+  --accent: #4d3bfe; /* если хочешь — как в hero */
   background: var(--bg);
   padding: clamp(22px, 3vw, 44px) 0;
 }
@@ -1075,8 +1075,8 @@ if ( empty($video) ) {
   --shadow: 0 18px 50px rgba(15,23,42,.10);
   --radius: 18px;
 
-  --accent: #7B67F0; /* можно в тон hero */
-  --accent2: #38bdf8;
+  --accent: #4d3bfe; /* можно в тон hero */
+  --accent2: #4d3bfe;
 
   padding: clamp(22px, 3vw, 48px) 0;
 }
@@ -1432,8 +1432,8 @@ if ( empty($video) ) {
   --shadow: 0 18px 50px rgba(15,23,42,.10);
   --radius: 18px;
 
-  --accent: #7B67F0;
-  --accent2: #38bdf8;
+  --accent: #4d3bfe;
+  --accent2: #4d3bfe;
 
   padding: clamp(22px, 3vw, 48px) 0;
 }
@@ -1686,8 +1686,8 @@ if ( empty($video) ) {
   --shadow: 0 18px 50px rgba(15,23,42,.10);
   --radius: 18px;
 
-  --accent: #7B67F0;
-  --accent2: #38bdf8;
+  --accent: #4d3bfe;
+  --accent2: #4d3bfe;
 
   --yes: #22c55e;
   --mid: #f59e0b;
@@ -2085,8 +2085,8 @@ if ( empty($video) ) {
   --shadow: 0 18px 50px rgba(15,23,42,.10);
   --radius: 18px;
 
-  --accent: #7B67F0;
-  --accent2: #38bdf8;
+  --accent: #4d3bfe;
+  --accent2: #4d3bfe;
 
   padding: clamp(22px, 3vw, 48px) 0;
 }
@@ -2478,8 +2478,8 @@ if ( empty($video) ) {
   --shadow: 0 18px 50px rgba(15,23,42,.10);
   --radius: 18px;
 
-  --accent: #7B67F0;
-  --accent2: #38bdf8;
+  --accent: #4d3bfe;
+  --accent2: #4d3bfe;
 
   padding: clamp(22px, 3vw, 48px) 0;
 }
@@ -2898,8 +2898,8 @@ if ( empty($video) ) {
   --shadow: 0 18px 50px rgba(15,23,42,.10);
   --radius: 18px;
 
-  --accent: #7B67F0;
-  --accent2: #38bdf8;
+  --accent: #4d3bfe;
+  --accent2: #4d3bfe;
 
   padding: clamp(22px, 3vw, 48px) 0;
 }
@@ -3185,8 +3185,8 @@ if ( empty($video) ) {
   --shadow: 0 24px 70px rgba(15,23,42,.20);
   --radius: 22px;
 
-  --accent: #7B67F0;
-  --accent2: #38bdf8;
+  --accent: #4d3bfe;
+  --accent2: #4d3bfe;
 
   padding: clamp(26px, 3.4vw, 56px) 0;
 }
