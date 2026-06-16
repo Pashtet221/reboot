@@ -659,4 +659,8 @@ $cta_second  = '#features';
 </div>
 
 <?php
+if (function_exists('ps_render_plugin_related_sections')) {
+	ps_render_plugin_related_sections();
+}
+
 get_footer();
