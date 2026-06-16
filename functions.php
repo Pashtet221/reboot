@@ -1197,11 +1197,137 @@ function ps_register_plugin_category_taxonomy() {
  */
 add_filter('theme_plugin_templates', 'ps_register_plugin_templates');
 function ps_register_plugin_templates($post_templates) {
-	$post_templates['template-plugin-dadata.php']   = 'Лендинг плагина: DaData';
-	$post_templates['template-plugin-checkout.php'] = 'Лендинг плагина: Checkout';
-	$post_templates['template-plugin-default.php']  = 'Лендинг плагина: Базовый';
+	$post_templates['plugins/page-dadata-woocommerce.php']       = 'Лендинг плагина: DaData WooCommerce';
+	$post_templates['plugins/page-custom-checkout.php']          = 'Лендинг плагина: Custom Checkout';
+	$post_templates['plugins/page-cdek-delivery.php']            = 'Лендинг плагина: CDEK Delivery';
+	$post_templates['plugins/page-store-hours.php']              = 'Лендинг плагина: WooCommerce Store Hours';
+	$post_templates['plugins/page-booking.php']                  = 'Лендинг плагина: HivePress Booking Reminders';
+	$post_templates['plugins/page-phone masks.php']              = 'Лендинг плагина: Automatic Phone Masks';
+	$post_templates['plugins/plugin-ai-translator-template.php'] = 'Лендинг плагина: AI PO Translator';
+	$post_templates['plugins/plugin-hivepress-map.php']          = 'Лендинг плагина: HivePress Map';
 
 	return $post_templates;
+}
+
+
+
+/**
+ * ACF поля для выбора похожих материалов на страницах плагинов.
+ */
+add_action('acf/init', 'ps_register_plugin_related_acf_fields');
+function ps_register_plugin_related_acf_fields() {
+	if (!function_exists('acf_add_local_field_group')) {
+		return;
+	}
+
+	acf_add_local_field_group([
+		'key' => 'group_ps_plugin_related_content',
+		'title' => 'Похожие материалы для плагина',
+		'fields' => [
+			[
+				'key' => 'field_ps_plugin_related_plugins',
+				'label' => 'Похожие плагины',
+				'name' => 'ps_plugin_related_plugins',
+				'type' => 'relationship',
+				'instructions' => 'Выберите плагины, которые нужно вывести в конце страницы.',
+				'post_type' => ['plugin'],
+				'filters' => ['search', 'taxonomy'],
+				'return_format' => 'id',
+			],
+			[
+				'key' => 'field_ps_plugin_related_articles',
+				'label' => 'Похожие статьи',
+				'name' => 'ps_plugin_related_articles',
+				'type' => 'relationship',
+				'instructions' => 'Выберите статьи, которые нужно вывести в конце страницы.',
+				'post_type' => ['post'],
+				'filters' => ['search', 'taxonomy'],
+				'return_format' => 'id',
+			],
+		],
+		'location' => [
+			[
+				[
+					'param' => 'post_type',
+					'operator' => '==',
+					'value' => 'plugin',
+				],
+			],
+		],
+	]);
+}
+
+function ps_get_plugin_related_ids($field_name, $post_id = null) {
+	$post_id = $post_id ?: get_the_ID();
+	$items = function_exists('get_field') ? get_field($field_name, $post_id) : get_post_meta($post_id, $field_name, true);
+
+	if (empty($items)) {
+		return [];
+	}
+
+	$ids = is_array($items) ? $items : [$items];
+	$ids = array_map(static function ($item) {
+		return is_object($item) && isset($item->ID) ? (int) $item->ID : (int) $item;
+	}, $ids);
+
+	return array_values(array_filter(array_unique($ids)));
+}
+
+function ps_render_plugin_related_sections($post_id = null) {
+	$post_id = $post_id ?: get_the_ID();
+
+	ps_render_plugin_related_section('Похожие плагины', ps_get_plugin_related_ids('ps_plugin_related_plugins', $post_id), 'plugin');
+	ps_render_plugin_related_section('Похожие статьи', ps_get_plugin_related_ids('ps_plugin_related_articles', $post_id), 'post');
+}
+
+function ps_render_plugin_related_section($title, array $ids, $post_type) {
+	if (empty($ids)) {
+		return;
+	}
+
+	$query = new WP_Query([
+		'post_type' => $post_type,
+		'post_status' => 'publish',
+		'post__in' => $ids,
+		'orderby' => 'post__in',
+		'posts_per_page' => count($ids),
+		'ignore_sticky_posts' => true,
+	]);
+
+	if (!$query->have_posts()) {
+		return;
+	}
+	?>
+	<section class="ps-plugin-related">
+		<div class="container">
+			<h2 class="ps-plugin-related__title"><?php echo esc_html($title); ?></h2>
+			<div class="ps-plugin-related__grid">
+				<?php while ($query->have_posts()) : $query->the_post(); ?>
+					<article <?php post_class('ps-plugin-related__card'); ?>>
+						<a class="ps-plugin-related__image-link" href="<?php the_permalink(); ?>" aria-label="<?php the_title_attribute(); ?>">
+							<?php if (has_post_thumbnail()) : ?>
+								<?php the_post_thumbnail('medium_large', ['class' => 'ps-plugin-related__image']); ?>
+							<?php else : ?>
+								<span class="ps-plugin-related__image ps-plugin-related__image--placeholder"></span>
+							<?php endif; ?>
+						</a>
+						<div class="ps-plugin-related__content">
+							<h3 class="ps-plugin-related__card-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+							<p class="ps-plugin-related__excerpt"><?php echo esc_html(wp_trim_words(wp_strip_all_tags(get_the_excerpt() ?: get_the_content()), 22)); ?></p>
+						</div>
+					</article>
+				<?php endwhile; ?>
+			</div>
+		</div>
+	</section>
+	<?php
+	wp_reset_postdata();
+}
+
+add_action('wp_enqueue_scripts', 'ps_enqueue_plugin_related_styles');
+function ps_enqueue_plugin_related_styles() {
+	$css = '.ps-plugin-related{padding:56px 0;background:#f8fafc}.ps-plugin-related>.container{box-sizing:border-box;width:100%;max-width:1240px;margin:0 auto;padding:0 24px}.ps-plugin-related__title{margin:0 0 24px;font-size:clamp(28px,3vw,40px);line-height:1.15;color:#0f172a}.ps-plugin-related__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}.ps-plugin-related__card{background:#fff;border:1px solid rgba(15,23,42,.08);border-radius:22px;overflow:hidden;box-shadow:0 12px 34px rgba(15,23,42,.05)}.ps-plugin-related__image-link{display:block;aspect-ratio:16/10;background:#e2e8f0}.ps-plugin-related__image{display:block;width:100%;height:100%;object-fit:cover}.ps-plugin-related__image--placeholder{background:linear-gradient(135deg,#dbeafe 0%,#e2e8f0 100%)}.ps-plugin-related__content{padding:20px}.ps-plugin-related__card-title{margin:0 0 10px;font-size:20px;line-height:1.3}.ps-plugin-related__card-title a{color:#0f172a;text-decoration:none}.ps-plugin-related__excerpt{margin:0;color:#64748b;line-height:1.6}@media(max-width:900px){.ps-plugin-related__grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:640px){.ps-plugin-related>.container{padding:0 16px}.ps-plugin-related__grid{grid-template-columns:1fr}.ps-plugin-related{padding:40px 0}}';
+	wp_add_inline_style('wp-block-library', $css);
 }
 
 
@@ -1211,10 +1337,38 @@ function ps_register_plugin_templates($post_templates) {
 
 
 
+add_filter('template_include', 'ps_plugin_legacy_template_include', 90);
+function ps_plugin_legacy_template_include($template) {
+	if (!is_singular('plugin')) {
+		return $template;
+	}
+
+	$legacy_templates = [
+		'page-dadata-woocommerce.php' => 'plugins/page-dadata-woocommerce.php',
+		'page-custom-checkout.php' => 'plugins/page-custom-checkout.php',
+		'page-cdek-delivery.php' => 'plugins/page-cdek-delivery.php',
+		'page-store-hours.php' => 'plugins/page-store-hours.php',
+		'page-booking.php' => 'plugins/page-booking.php',
+		'page-phone masks.php' => 'plugins/page-phone masks.php',
+		'plugin-ai-translator-template.php' => 'plugins/plugin-ai-translator-template.php',
+		'plugin-hivepress-map.php' => 'plugins/plugin-hivepress-map.php',
+	];
+
+	$selected_template = get_page_template_slug(get_queried_object_id());
+	if (isset($legacy_templates[$selected_template])) {
+		$plugin_template = get_stylesheet_directory() . '/' . $legacy_templates[$selected_template];
+		if (file_exists($plugin_template)) {
+			return $plugin_template;
+		}
+	}
+
+	return $template;
+}
+
 add_filter('template_include', 'ps_plugin_archive_template_include', 99);
 function ps_plugin_archive_template_include($template) {
 	if (is_post_type_archive('plugin')) {
-		$custom_template = get_stylesheet_directory() . '/archive-plugin.php';
+		$custom_template = get_stylesheet_directory() . '/plugins/archive-plugin.php';
 
 		if (file_exists($custom_template)) {
 			return $custom_template;
@@ -1237,7 +1391,7 @@ function ps_plugin_archive_template_include($template) {
 add_filter('template_include', 'ps_plugin_category_template_include', 99);
 function ps_plugin_category_template_include($template) {
 	if (is_tax('plugin_category')) {
-		$custom_template = get_stylesheet_directory() . '/taxonomy-plugin_category.php';
+		$custom_template = get_stylesheet_directory() . '/plugins/taxonomy-plugin_category.php';
 
 		if (file_exists($custom_template)) {
 			return $custom_template;
