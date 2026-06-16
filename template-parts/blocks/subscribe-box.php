@@ -19,8 +19,12 @@
 <div class="subscribe-box">
     <div class="subscribe-box-inner">
         <div class="subscribe-box__header">
-            Получай лучшие статьи на почту каждую неделю
+            Новые плагины и обновления — на почту
         </div>
+
+        <p class="subscribe-box__text">
+            Узнавайте первыми о новых плагинах, обновлениях и скидках для интернет-магазинов на WordPress и WooCommerce.
+        </p>
 
         <div class="subscribe-box__form">
             <input type="text" placeholder="Ваше имя">
