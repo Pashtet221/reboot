@@ -1192,173 +1192,14 @@ function ps_register_plugin_category_taxonomy() {
 	register_taxonomy('plugin_category', array('plugin'), $args);
 }
 
-
-
-/**
- * ACF поля связей для страниц плагинов.
- */
-add_action('acf/init', 'ps_register_plugin_related_fields');
-function ps_register_plugin_related_fields() {
-	if (!function_exists('acf_add_local_field_group')) {
-		return;
-	}
-
-	acf_add_local_field_group(array(
-		'key' => 'group_ps_plugin_related_content',
-		'title' => 'Связанный контент плагина',
-		'fields' => array(
-			array(
-				'key' => 'field_ps_related_plugins',
-				'label' => 'Похожие плагины',
-				'name' => 'ps_related_plugins',
-				'type' => 'relationship',
-				'instructions' => 'Выберите плагины, которые нужно вывести в конце страницы.',
-				'post_type' => array('plugin'),
-				'filters' => array('search', 'taxonomy'),
-				'return_format' => 'id',
-			),
-			array(
-				'key' => 'field_ps_related_articles',
-				'label' => 'Похожие статьи',
-				'name' => 'ps_related_articles',
-				'type' => 'relationship',
-				'instructions' => 'Выберите записи блога, которые нужно вывести в конце страницы.',
-				'post_type' => array('post'),
-				'filters' => array('search', 'taxonomy'),
-				'return_format' => 'id',
-			),
-		),
-		'location' => array(
-			array(
-				array(
-					'param' => 'post_type',
-					'operator' => '==',
-					'value' => 'plugin',
-				),
-			),
-		),
-	));
-}
-
-function ps_get_related_posts_from_acf($field_name, $post_id) {
-	if (!function_exists('get_field')) {
-		return array();
-	}
-
-	$items = get_field($field_name, $post_id);
-	if (empty($items) || !is_array($items)) {
-		return array();
-	}
-
-	$post_ids = array_map(function ($item) {
-		if ($item instanceof WP_Post) {
-			return absint($item->ID);
-		}
-
-		return absint($item);
-	}, $items);
-
-	return array_values(array_filter($post_ids));
-}
-
-function ps_render_plugin_related_section($title, $post_ids, $modifier = '') {
-	if (empty($post_ids)) {
-		return;
-	}
-
-	$query = new WP_Query(array(
-		'post_type' => array('plugin', 'post'),
-		'post__in' => $post_ids,
-		'orderby' => 'post__in',
-		'posts_per_page' => count($post_ids),
-		'post_status' => 'publish',
-	));
-
-	if (!$query->have_posts()) {
-		wp_reset_postdata();
-		return;
-	}
-	?>
-	<section class="ps-related-content__section <?php echo esc_attr($modifier); ?>">
-		<h2 class="ps-related-content__title"><?php echo esc_html($title); ?></h2>
-		<div class="ps-related-content__grid">
-			<?php while ($query->have_posts()) : $query->the_post(); ?>
-				<article <?php post_class('ps-related-card'); ?>>
-					<a class="ps-related-card__image-link" href="<?php the_permalink(); ?>" aria-label="<?php the_title_attribute(); ?>">
-						<?php if (has_post_thumbnail()) : ?>
-							<?php the_post_thumbnail('medium_large', array('class' => 'ps-related-card__image')); ?>
-						<?php else : ?>
-							<span class="ps-related-card__image ps-related-card__image--placeholder"></span>
-						<?php endif; ?>
-					</a>
-					<div class="ps-related-card__body">
-						<h3 class="ps-related-card__title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-						<p class="ps-related-card__excerpt"><?php echo esc_html(wp_trim_words(wp_strip_all_tags(get_the_excerpt() ?: get_the_content()), 18)); ?></p>
-						<a class="ps-related-card__more" href="<?php the_permalink(); ?>">Подробнее</a>
-					</div>
-				</article>
-			<?php endwhile; ?>
-		</div>
-	</section>
-	<?php
-	wp_reset_postdata();
-}
-
-function ps_render_plugin_related_content($post_id = null) {
-	global $ps_plugin_related_content_rendered;
-
-	if (!empty($ps_plugin_related_content_rendered)) {
-		return;
-	}
-
-	$post_id = $post_id ? absint($post_id) : get_the_ID();
-	if (!$post_id || get_post_type($post_id) !== 'plugin') {
-		return;
-	}
-
-	$related_plugins = ps_get_related_posts_from_acf('ps_related_plugins', $post_id);
-	$related_articles = ps_get_related_posts_from_acf('ps_related_articles', $post_id);
-
-	if (empty($related_plugins) && empty($related_articles)) {
-		return;
-	}
-
-	$ps_plugin_related_content_rendered = true;
-	?>
-	<div class="ps-related-content">
-		<div class="ps-related-content__container">
-			<?php ps_render_plugin_related_section('Похожие плагины', $related_plugins, 'ps-related-content__section--plugins'); ?>
-			<?php ps_render_plugin_related_section('Похожие статьи', $related_articles, 'ps-related-content__section--articles'); ?>
-		</div>
-	</div>
-	<style>
-		.ps-related-content{padding:56px 0;background:#f8fafc}.ps-related-content__container{max-width:1200px;margin:0 auto;padding:0 20px}.ps-related-content__section+.ps-related-content__section{margin-top:44px}.ps-related-content__title{margin:0 0 24px;font-size:clamp(28px,3vw,40px);line-height:1.15;color:#0f172a}.ps-related-content__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}.ps-related-card{overflow:hidden;border:1px solid rgba(15,23,42,.08);border-radius:22px;background:#fff;box-shadow:0 12px 34px rgba(15,23,42,.06)}.ps-related-card__image-link{display:block;aspect-ratio:16/10;background:#e2e8f0;overflow:hidden}.ps-related-card__image{display:block;width:100%;height:100%;object-fit:cover}.ps-related-card__image--placeholder{background:linear-gradient(135deg,#dbeafe,#e2e8f0)}.ps-related-card__body{padding:20px}.ps-related-card__title{margin:0 0 10px;font-size:20px;line-height:1.3}.ps-related-card__title a{color:#0f172a;text-decoration:none}.ps-related-card__excerpt{margin:0 0 16px;color:#64748b;line-height:1.65}.ps-related-card__more{font-weight:700;color:#2563eb;text-decoration:none}@media(max-width:900px){.ps-related-content__grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:640px){.ps-related-content__grid{grid-template-columns:1fr}.ps-related-content{padding:40px 0}}
-	</style>
-	<?php
-}
-
-add_filter('the_content', 'ps_append_plugin_related_content');
-function ps_append_plugin_related_content($content) {
-	if (!is_singular('plugin') || !in_the_loop() || !is_main_query()) {
-		return $content;
-	}
-
-	ob_start();
-	ps_render_plugin_related_content(get_the_ID());
-
-	return $content . ob_get_clean();
-}
-
 /**
  * Включаем поддержку шаблонов для CPT plugin
  */
 add_filter('theme_plugin_templates', 'ps_register_plugin_templates');
 function ps_register_plugin_templates($post_templates) {
-	$post_templates['plugins/plugin-ai-translator-template.php'] = 'Лендинг плагина: AI PO Translator';
-	$post_templates['plugins/plugin-hivepress-map.php']          = 'Лендинг плагина: HivePress Map';
-	$post_templates['plugins/template-plugin-dadata.php']        = 'Лендинг плагина: DaData';
-	$post_templates['plugins/template-plugin-checkout.php']      = 'Лендинг плагина: Checkout';
-	$post_templates['plugins/template-plugin-default.php']       = 'Лендинг плагина: Базовый';
+	$post_templates['template-plugin-dadata.php']   = 'Лендинг плагина: DaData';
+	$post_templates['template-plugin-checkout.php'] = 'Лендинг плагина: Checkout';
+	$post_templates['template-plugin-default.php']  = 'Лендинг плагина: Базовый';
 
 	return $post_templates;
 }
@@ -1373,7 +1214,7 @@ function ps_register_plugin_templates($post_templates) {
 add_filter('template_include', 'ps_plugin_archive_template_include', 99);
 function ps_plugin_archive_template_include($template) {
 	if (is_post_type_archive('plugin')) {
-		$custom_template = get_stylesheet_directory() . '/plugins/archive-plugin.php';
+		$custom_template = get_stylesheet_directory() . '/archive-plugin.php';
 
 		if (file_exists($custom_template)) {
 			return $custom_template;
@@ -1396,7 +1237,7 @@ function ps_plugin_archive_template_include($template) {
 add_filter('template_include', 'ps_plugin_category_template_include', 99);
 function ps_plugin_category_template_include($template) {
 	if (is_tax('plugin_category')) {
-		$custom_template = get_stylesheet_directory() . '/plugins/taxonomy-plugin_category.php';
+		$custom_template = get_stylesheet_directory() . '/taxonomy-plugin_category.php';
 
 		if (file_exists($custom_template)) {
 			return $custom_template;
