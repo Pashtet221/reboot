@@ -3473,4 +3473,4 @@ if ( empty($video) ) {
   </div>
 </main>
 
-<?php get_footer(); ?>
+<?php ps_render_plugin_related_content(get_the_ID()); get_footer(); ?>

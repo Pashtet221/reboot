@@ -659,4 +659,5 @@ $cta_second  = '#features';
 </div>
 
 <?php
+ps_render_plugin_related_content(get_the_ID());
 get_footer();
