@@ -29,7 +29,7 @@ get_header();
 
                 <div class="psdevHero__actions">
                     <a href="/contact" class="psdevBtn psdevBtn--primary">Обсудить задачу</a>
-                    <a href="/plugins" class="psdevBtn psdevBtn--ghost">Смотреть готовые решения</a>
+                    <a href="/wp-plugins" class="psdevBtn psdevBtn--ghost">Смотреть готовые решения</a>
                 </div>
 
                 <div class="psdevHero__trust">

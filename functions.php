@@ -268,7 +268,7 @@ add_shortcode('wps_hero', function () {
     </p>
 
     <p class="wpsHero__trust">
-        <a class="wpsHero__btn wpsHero__btn--primary" href="/plugins/">Смотреть плагины →</a>
+        <a class="wpsHero__btn wpsHero__btn--primary" href="/wp-plugins/">Смотреть плагины →</a>
         <a class="wpsHero__btn wpsHero__btn--ghost" href="/contacts/">Написать по задаче</a>
     </p>
 </div>
@@ -665,7 +665,7 @@ add_shortcode('wpds_cta', function () {
             <p>Опишите, что нужно сделать — разберёмся, подберём решение и назовём стоимость. Без лишних вопросов и шаблонных ответов.</p>
             <div class="wpdsCta__actions">
                 <a class="wpdsCta__btn wpdsCta__btn--primary" href="/contacts/">Написать о задаче →</a>
-                <a class="wpdsCta__btn wpdsCta__btn--ghost" href="/plugins/">Смотреть готовые плагины</a>
+                <a class="wpdsCta__btn wpdsCta__btn--ghost" href="/wp-plugins/">Смотреть готовые плагины</a>
             </div>
         </div>
     </section>
@@ -1263,9 +1263,9 @@ function ps_register_plugin_post_type() {
 			'thumbnail',
 			'page-attributes',
 		),
-		'has_archive'        => 'plugins',
+		'has_archive'        => 'wp-plugins',
 		'rewrite'            => array(
-			'slug'       => 'plugins',
+			'slug'       => 'wp-plugins',
 			'with_front' => false,
 		),
 		'menu_position'      => 5,
