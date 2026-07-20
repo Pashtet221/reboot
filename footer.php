@@ -50,7 +50,7 @@ $is_show_arrow_mob = ( $wpshop_core->get_option( 'arrow_mob_display' ) ) ? ' dat
     <div class="ps-footer__col">
       <h3>Разделы</h3>
       <ul>
-        <li><a href="/plugins/">Плагины</a></li>
+        <li><a href="/wp-plugins/">Плагины</a></li>
         <li><a href="/blog/">Блог</a></li>
         <li><a href="/contacts/">Контакты</a></li>
         <li><a href="/sitemap/">Карта сайта</a></li>
