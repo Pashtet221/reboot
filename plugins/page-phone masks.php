@@ -687,6 +687,11 @@ get_header();
 }
 </style>
 
+<?php if (function_exists('ps_render_plugin_specs')) {
+	ps_render_plugin_specs(array('version' => '1.0.0', 'wp_tested' => 'WordPress 6.6', 'wc_tested' => 'WooCommerce 9.1', 'updated' => '21 июля 2026'));
+}
+?>
+
 <?php if (function_exists('ps_render_plugin_related_sections')) {
 	ps_render_plugin_related_sections();
 }
