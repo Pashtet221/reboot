@@ -429,7 +429,7 @@ add_shortcode('top_month_plugins', function () {
                                 <span>Автозаполнение</span><span class="pCard__dot">·</span><span>WooCommerce</span>
                             </div>
 
-                            <a class="pCard__btn pCard__btn--green" href="/wp-plugins/dadata-woocommerce/">Подробнее →</a>
+                            <a class="pCard__btn pCard__btn--green" href="https://plugins-store.ru/wp-plugins/dadata-dlya-woocommerce-avtozapolnenie-adresa-i-inn/">Подробнее →</a>
                         </div>
                     </div>
                 </article>
@@ -456,7 +456,7 @@ add_shortcode('top_month_plugins', function () {
                                 <span>Чекаут</span><span class="pCard__dot">·</span><span>Конверсия</span>
                             </div>
 
-                            <a class="pCard__btn pCard__btn--purple" href="/wp-plugins/custom-checkout/">Подробнее →</a>
+                            <a class="pCard__btn pCard__btn--purple" href="https://plugins-store.ru/wp-plugins/kastomnyj-checkout-dlya-woocommerce-razrabotka-pod-vash-proekt/">Подробнее →</a>
                         </div>
                     </div>
                 </article>
@@ -483,7 +483,7 @@ add_shortcode('top_month_plugins', function () {
                                 <span>Доставка</span><span class="pCard__dot">·</span><span>WooCommerce</span>
                             </div>
 
-                            <a class="pCard__btn pCard__btn--blue" href="/wp-plugins/cdek-delivery/">Подробнее →</a>
+                            <a class="pCard__btn pCard__btn--blue" href="https://plugins-store.ru/wp-plugins/integracziya-cdek-dlya-woocommerce-podklyuchenie-i-dorabotka-dostavki/">Подробнее →</a>
                         </div>
                     </div>
                 </article>
@@ -511,7 +511,7 @@ add_shortcode('top_month_plugins', function () {
                                 <span>Маркетплейсы</span><span class="pCard__dot">·</span><span>HivePress</span>
                             </div>
 
-                            <a class="pCard__btn pCard__btn--purpleOutline" href="/wp-plugins/hivepress-map/">Подробнее →</a>
+                            <a class="pCard__btn pCard__btn--purpleOutline" href="https://plugins-store.ru/wp-plugins/hivepress-map-listings-obyavleniya-na-karte/">Подробнее →</a>
                         </div>
                     </div>
                 </article>
