@@ -1329,11 +1329,82 @@ function ps_register_plugin_templates($post_templates) {
 	$post_templates['plugins/page-phone masks.php']              = 'Лендинг плагина: Automatic Phone Masks';
 	$post_templates['plugins/plugin-ai-translator-template.php'] = 'Лендинг плагина: AI PO Translator';
 	$post_templates['plugins/plugin-hivepress-map.php']          = 'Лендинг плагина: HivePress Map';
+	$post_templates['plugins/page-woocommerce-subscriptions.php']  = 'Лендинг плагина: WooCommerce Subscriptions';
+	$post_templates['plugins/page-woocommerce-one-click-order.php'] = 'Лендинг плагина: заказ в 1 клик';
+	$post_templates['plugins/page-hivepress-paid-listings.php']     = 'Лендинг плагина: платные объявления HivePress';
+	$post_templates['plugins/page-wordpress-crm-integration.php']   = 'Лендинг плагина: интеграция WordPress с CRM';
 
 	return $post_templates;
 }
 
 
+
+
+/**
+ * Спецификации и SEO-метаданные для страниц плагинов.
+ */
+function ps_get_plugin_spec_defaults($overrides = array()) {
+	$defaults = array(
+		'version'       => '1.0.0',
+		'wp_tested'     => 'WordPress 6.6',
+		'wc_tested'     => 'WooCommerce 9.1',
+		'php'           => 'PHP 8.0+',
+		'updated'       => '21 июля 2026',
+		'license'       => 'Коммерческая лицензия',
+		'format'        => 'Плагин под проект',
+	);
+
+	return wp_parse_args($overrides, $defaults);
+}
+
+function ps_render_plugin_specs($overrides = array()) {
+	$specs = ps_get_plugin_spec_defaults($overrides);
+	?>
+	<section class="ps-plugin-specs" id="specifications">
+		<div class="container">
+			<div class="ps-plugin-specs__inner">
+				<div class="ps-plugin-specs__heading">
+					<p class="ps-plugin-specs__eyebrow">Спецификации плагина</p>
+					<h2>Технические метаданные и совместимость</h2>
+					<p>Блок помогает быстро оценить актуальность решения перед покупкой, внедрением или доработкой под ваш WordPress-проект.</p>
+				</div>
+
+				<dl class="ps-plugin-specs__grid">
+					<div class="ps-plugin-specs__item"><dt>Текущая версия</dt><dd><?php echo esc_html($specs['version']); ?></dd></div>
+					<div class="ps-plugin-specs__item"><dt>Совместимость WordPress</dt><dd><?php echo esc_html($specs['wp_tested']); ?></dd></div>
+					<div class="ps-plugin-specs__item"><dt>Совместимость WooCommerce</dt><dd><?php echo esc_html($specs['wc_tested']); ?></dd></div>
+					<div class="ps-plugin-specs__item"><dt>Версия PHP</dt><dd><?php echo esc_html($specs['php']); ?></dd></div>
+					<div class="ps-plugin-specs__item"><dt>Последнее обновление</dt><dd><?php echo esc_html($specs['updated']); ?></dd></div>
+					<div class="ps-plugin-specs__item"><dt>Формат поставки</dt><dd><?php echo esc_html($specs['format']); ?></dd></div>
+					<div class="ps-plugin-specs__item"><dt>Лицензия</dt><dd><?php echo esc_html($specs['license']); ?></dd></div>
+				</dl>
+			</div>
+		</div>
+	</section>
+
+	<script type="application/ld+json">
+	<?php
+	echo wp_json_encode(array(
+		'@context' => 'https://schema.org',
+		'@type' => 'SoftwareApplication',
+		'name' => get_the_title(),
+		'applicationCategory' => 'WordPressPlugin',
+		'operatingSystem' => 'WordPress',
+		'softwareVersion' => $specs['version'],
+		'dateModified' => $specs['updated'],
+	), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+	?>
+	</script>
+	<?php
+}
+
+add_action('wp_enqueue_scripts', 'ps_enqueue_plugin_specs_styles');
+function ps_enqueue_plugin_specs_styles() {
+	$css = '.ps-plugin-specs{padding:64px 0;background:#fff}.ps-plugin-specs__inner{padding:34px;border:1px solid rgba(15,23,42,.08);border-radius:28px;background:linear-gradient(135deg,#fff 0%,#f8fafc 100%);box-shadow:0 18px 50px rgba(15,23,42,.06)}.ps-plugin-specs__heading{max-width:760px;margin-bottom:26px}.ps-plugin-specs__eyebrow{display:inline-flex;margin:0 0 12px;padding:7px 12px;border-radius:999px;background:rgba(37,99,235,.08);color:#2563eb;font-size:13px;font-weight:700}.ps-plugin-specs__heading h2{margin:0 0 12px;color:#0f172a;font-size:clamp(28px,3vw,40px);line-height:1.15}.ps-plugin-specs__heading p{margin:0;color:#64748b;font-size:17px;line-height:1.65}.ps-plugin-specs__grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:0}.ps-plugin-specs__item{padding:18px;border-radius:18px;background:#fff;border:1px solid rgba(15,23,42,.07)}.ps-plugin-specs__item dt{margin:0 0 8px;color:#64748b;font-size:13px}.ps-plugin-specs__item dd{margin:0;color:#0f172a;font-weight:800;font-size:16px}@media(max-width:1000px){.ps-plugin-specs__grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:640px){.ps-plugin-specs{padding:44px 0}.ps-plugin-specs__inner{padding:22px}.ps-plugin-specs__grid{grid-template-columns:1fr}}';
+	wp_register_style('ps-plugin-specs', false, array(), null);
+	wp_enqueue_style('ps-plugin-specs');
+	wp_add_inline_style('ps-plugin-specs', $css);
+}
 
 /**
  * ACF поля для выбора похожих материалов на страницах плагинов.
@@ -1476,6 +1547,10 @@ function ps_plugin_legacy_template_include($template) {
 		'page-phone masks.php' => 'plugins/page-phone masks.php',
 		'plugin-ai-translator-template.php' => 'plugins/plugin-ai-translator-template.php',
 		'plugin-hivepress-map.php' => 'plugins/plugin-hivepress-map.php',
+		'page-woocommerce-subscriptions.php' => 'plugins/page-woocommerce-subscriptions.php',
+		'page-woocommerce-one-click-order.php' => 'plugins/page-woocommerce-one-click-order.php',
+		'page-hivepress-paid-listings.php' => 'plugins/page-hivepress-paid-listings.php',
+		'page-wordpress-crm-integration.php' => 'plugins/page-wordpress-crm-integration.php',
 	];
 
 	$selected_template = get_page_template_slug(get_queried_object_id());
