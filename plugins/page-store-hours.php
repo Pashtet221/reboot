@@ -25,7 +25,7 @@ get_header();
                     </p>
 
                     <div class="pscdHero__actions">
-                        <a href="/contact" class="pscdBtn pscdBtn--primary">Заказать плагин</a>
+                        <a href="/contacts" class="pscdBtn pscdBtn--primary">Заказать плагин</a>
                         <a href="mailto:paveldamut4@gmail.com" class="pscdBtn pscdBtn--ghost">Задать вопрос</a>
                     </div>
 
@@ -401,7 +401,7 @@ get_header();
                 </div>
 
                 <div class="pscdCta__actions">
-                    <a href="/contact" class="pscdBtn pscdBtn--primary">Обсудить плагин</a>
+                    <a href="/contacts" class="pscdBtn pscdBtn--primary">Обсудить плагин</a>
                     <a href="mailto:paveldamut4@gmail.com" class="pscdBtn pscdBtn--ghost">Написать на почту</a>
                 </div>
             </div>
@@ -491,7 +491,7 @@ get_header();
 }
 
 .pscdBtn--primary {
-    background: linear-gradient(135deg, #6c40ff 0%, #8b5cff 100%);
+    background: #6c40ff;
     color: #fff;
     box-shadow: 0 18px 40px rgba(108, 64, 255, 0.18);
 }
@@ -584,7 +584,7 @@ get_header();
 }
 
 .pscdCard--accent {
-    background: linear-gradient(180deg, #fff 0%, #faf8ff 100%);
+    background: #fff;
 }
 
 .pscdSteps {
@@ -604,7 +604,7 @@ get_header();
     width: 68px;
     height: 68px;
     border-radius: 20px;
-    background: linear-gradient(135deg, #6c40ff 0%, #8b5cff 100%);
+    background: #6c40ff;
     color: #fff;
     font-size: 22px;
     font-weight: 800;
@@ -628,7 +628,7 @@ get_header();
     justify-content: space-between;
     gap: 24px;
     align-items: center;
-    background: linear-gradient(180deg, #ffffff 0%, #f8f6ff 100%);
+    background: #fff;
 }
 
 .pscdCta__content {
