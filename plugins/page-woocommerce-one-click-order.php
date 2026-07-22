@@ -17,7 +17,7 @@ get_header();
                     <p class="pscpHero__text">Разрабатываю быстрый заказ в один клик для WooCommerce: всплывающая форма, передача товара в заявку, уведомления менеджеру и интеграция с CRM. Помогает получать больше лидов без сложного checkout.</p>
                     <div class="pscpHero__actions">
                         <a href="/contacts" class="pscpBtn pscpBtn--primary">Добавить заказ в 1 клик</a>
-                        <a href="/plugins-development/" class="pscpBtn pscpBtn--ghost">Доработка под проект</a>
+                        <a href="https://plugins-store.ru/razrabotka-plagina-pod-klyuch/" class="pscpBtn pscpBtn--ghost">Доработка под проект</a>
                     </div>
                 </div>
                 <aside class="pscpPanel">

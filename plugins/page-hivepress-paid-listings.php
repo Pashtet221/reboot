@@ -17,7 +17,7 @@ get_header();
                     <p class="pscpHero__text">Делаю платное размещение объявлений для HivePress: тарифы, лимиты публикаций, поднятие в поиске, выделение карточек и оплату через WooCommerce.</p>
                     <div class="pscpHero__actions">
                         <a href="/contacts" class="pscpBtn pscpBtn--primary">Настроить платные объявления</a>
-                        <a href="/plugins-development/" class="pscpBtn pscpBtn--ghost">Доработка под проект</a>
+                        <a href="https://plugins-store.ru/razrabotka-plagina-pod-klyuch/" class="pscpBtn pscpBtn--ghost">Доработка под проект</a>
                     </div>
                 </div>
                 <aside class="pscpPanel">
