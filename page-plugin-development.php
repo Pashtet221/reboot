@@ -28,7 +28,7 @@ get_header();
                 </p>
 
                 <div class="psdevHero__actions">
-                    <a href="/contact" class="psdevBtn psdevBtn--primary">Обсудить задачу</a>
+                    <a href="/contacts" class="psdevBtn psdevBtn--primary">Обсудить задачу</a>
                     <a href="/wp-plugins" class="psdevBtn psdevBtn--ghost">Смотреть готовые решения</a>
                 </div>
 
@@ -243,7 +243,7 @@ get_header();
             </div>
 
             <div class="psdevCta__actions">
-                <a href="/contact" class="psdevBtn psdevBtn--primary">Обсудить проект</a>
+                <a href="/contacts" class="psdevBtn psdevBtn--primary">Обсудить проект</a>
                 <a href="mailto:paveldamut4@gmail.com" class="psdevBtn psdevBtn--ghost">Написать на почту</a>
             </div>
 
@@ -340,7 +340,7 @@ get_header();
 }
 
 .psdevBtn--primary {
-    background: linear-gradient(135deg, #6c40ff 0%, #8b5cff 100%);
+    background: #6c40ff;
     color: #fff;
     box-shadow: 0 18px 40px rgba(108, 64, 255, 0.18);
 }
@@ -438,7 +438,7 @@ get_header();
 }
 
 .psdevCard--accent {
-    background: linear-gradient(180deg, #fff 0%, #faf8ff 100%);
+    background: #fff;
 }
 
 .psdevSteps {
@@ -458,7 +458,7 @@ get_header();
     width: 68px;
     height: 68px;
     border-radius: 20px;
-    background: linear-gradient(135deg, #6c40ff 0%, #8b5cff 100%);
+    background: #6c40ff;
     color: #fff;
     font-size: 22px;
     font-weight: 800;
@@ -482,7 +482,7 @@ get_header();
     justify-content: space-between;
     gap: 24px;
     align-items: center;
-    background: linear-gradient(180deg, #ffffff 0%, #f8f6ff 100%);
+    background: #fff;
 }
 
 .psdevCta__content {

@@ -25,7 +25,7 @@ get_header();
                 </p>
 
                 <div class="psddHero__actions">
-                    <a href="/contact" class="psddBtn psddBtn--primary">Подключить DaData</a>
+                    <a href="/contacts" class="psddBtn psddBtn--primary">Подключить DaData</a>
                     <a href="/plugins-development/" class="psddBtn psddBtn--ghost">Нужна доработка под проект</a>
                 </div>
 
@@ -335,7 +335,7 @@ get_header();
             </div>
 
             <div class="psddCta__actions">
-                <a href="/contact" class="psddBtn psddBtn--primary">Обсудить подключение</a>
+                <a href="/contacts" class="psddBtn psddBtn--primary">Обсудить подключение</a>
                 <a href="mailto:paveldamut4@gmail.com" class="psddBtn psddBtn--ghost">Написать на почту</a>
             </div>
         </div>
@@ -425,7 +425,7 @@ get_header();
 }
 
 .psddBtn--primary {
-    background: linear-gradient(135deg, #6c40ff 0%, #8b5cff 100%);
+    background: #6c40ff;
     color: #fff;
     box-shadow: 0 18px 40px rgba(108, 64, 255, 0.18);
 }
@@ -518,7 +518,7 @@ get_header();
 }
 
 .psddCard--accent {
-    background: linear-gradient(180deg, #fff 0%, #faf8ff 100%);
+    background: #fff;
 }
 
 .psddSteps {
@@ -538,7 +538,7 @@ get_header();
     width: 68px;
     height: 68px;
     border-radius: 20px;
-    background: linear-gradient(135deg, #6c40ff 0%, #8b5cff 100%);
+    background: #6c40ff;
     color: #fff;
     font-size: 22px;
     font-weight: 800;
@@ -562,7 +562,7 @@ get_header();
     justify-content: space-between;
     gap: 24px;
     align-items: center;
-    background: linear-gradient(180deg, #ffffff 0%, #f8f6ff 100%);
+    background: #fff;
 }
 
 .psddCta__content {
