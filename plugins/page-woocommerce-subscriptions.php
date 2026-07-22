@@ -17,7 +17,7 @@ get_header();
                     <p class="pscpHero__text">Настраиваю подписки, регулярные платежи, автопродления и доступ по тарифам для интернет-магазина на WooCommerce. Подходит для SaaS, клубов, онлайн-сервисов и продажи товаров по подписке.</p>
                     <div class="pscpHero__actions">
                         <a href="/contacts" class="pscpBtn pscpBtn--primary">Заказать плагин подписок</a>
-                        <a href="/plugins-development/" class="pscpBtn pscpBtn--ghost">Доработка под проект</a>
+                        <a href="https://plugins-store.ru/razrabotka-plagina-pod-klyuch/" class="pscpBtn pscpBtn--ghost">Доработка под проект</a>
                     </div>
                 </div>
                 <aside class="pscpPanel">

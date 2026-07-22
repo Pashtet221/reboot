@@ -17,7 +17,7 @@ get_header();
                     <p class="pscpHero__text">Подключаю WordPress, WooCommerce и формы сайта к CRM: передача заявок, заказов, UTM-меток, статусов и уведомлений менеджерам. Решение адаптируется под вашу воронку продаж.</p>
                     <div class="pscpHero__actions">
                         <a href="/contacts" class="pscpBtn pscpBtn--primary">Подключить CRM</a>
-                        <a href="/plugins-development/" class="pscpBtn pscpBtn--ghost">Доработка под проект</a>
+                        <a href="https://plugins-store.ru/razrabotka-plagina-pod-klyuch/" class="pscpBtn pscpBtn--ghost">Доработка под проект</a>
                     </div>
                 </div>
                 <aside class="pscpPanel">
