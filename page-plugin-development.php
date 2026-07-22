@@ -332,6 +332,7 @@ get_header();
     border-radius: 16px;
     text-decoration: none;
     font-weight: 700;
+    white-space: nowrap;
     transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
 }
 

@@ -1364,7 +1364,6 @@ function ps_render_plugin_specs($overrides = array()) {
 		<div class="container">
 			<div class="ps-plugin-specs__inner">
 				<div class="ps-plugin-specs__heading">
-					<p class="ps-plugin-specs__eyebrow">Паспорт плагина</p>
 					<h2>Технические метаданные</h2>
 					<p>Блок помогает быстро оценить актуальность решения перед покупкой, внедрением или доработкой под ваш WordPress-проект.</p>
 				</div>
@@ -1400,7 +1399,7 @@ function ps_render_plugin_specs($overrides = array()) {
 
 add_action('wp_enqueue_scripts', 'ps_enqueue_plugin_specs_styles');
 function ps_enqueue_plugin_specs_styles() {
-	$css = '.ps-plugin-specs{padding:64px 0;background:#fff}.ps-plugin-specs__inner{padding:34px;border:1px solid rgba(15,23,42,.08);border-radius:28px;background:#fff;box-shadow:0 18px 50px rgba(15,23,42,.06)}.ps-plugin-specs__heading{max-width:760px;margin-bottom:28px;padding-bottom:24px;border-bottom:1px solid rgba(15,23,42,.08)}.ps-plugin-specs__eyebrow{display:inline-flex;margin:0 0 12px;padding:7px 12px;border-radius:999px;background:rgba(108,64,255,.08);color:#6c40ff;font-size:13px;font-weight:700}.ps-plugin-specs__heading h2{margin:0 0 12px;color:#0f172a;font-size:clamp(28px,3vw,40px);line-height:1.15}.ps-plugin-specs__heading p{margin:0;color:#64748b;font-size:17px;line-height:1.65}.ps-plugin-specs__grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:0}.ps-plugin-specs__item{padding:18px;border-radius:18px;background:#fff;border:1px solid rgba(15,23,42,.07);box-shadow:0 8px 24px rgba(15,23,42,.04)}.ps-plugin-specs__item dt{margin:0 0 8px;color:#64748b;font-size:13px}.ps-plugin-specs__item dd{margin:0;color:#0f172a;font-weight:800;font-size:16px}@media(max-width:1000px){.ps-plugin-specs__grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:640px){.ps-plugin-specs{padding:44px 0}.ps-plugin-specs__inner{padding:22px}.ps-plugin-specs__grid{grid-template-columns:1fr}}';
+	$css = '.ps-plugin-specs{padding:64px 0;background:#fff}.ps-plugin-specs__inner{padding:34px;border:1px solid rgba(15,23,42,.08);border-radius:28px;background:#fff;box-shadow:0 18px 50px rgba(15,23,42,.06)}.ps-plugin-specs__heading{max-width:760px;margin:0 0 28px;padding-bottom:24px;border-bottom:1px solid rgba(15,23,42,.08);text-align:left}.ps-plugin-specs__heading h2{margin:0 0 12px;color:#0f172a;font-size:clamp(28px,3vw,40px);line-height:1.15}.ps-plugin-specs__heading p{margin:0;color:#64748b;font-size:17px;line-height:1.65}.ps-plugin-specs__grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:0}.ps-plugin-specs__item{padding:18px;border-radius:18px;background:#fff;border:1px solid rgba(15,23,42,.07);box-shadow:0 8px 24px rgba(15,23,42,.04)}.ps-plugin-specs__item dt{margin:0 0 8px;color:#64748b;font-size:13px}.ps-plugin-specs__item dd{margin:0;color:#0f172a;font-weight:800;font-size:16px}@media(max-width:1000px){.ps-plugin-specs__grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:640px){.ps-plugin-specs{padding:44px 0}.ps-plugin-specs__inner{padding:22px}.ps-plugin-specs__grid{grid-template-columns:1fr}}';
 	wp_register_style('ps-plugin-specs', false, array(), null);
 	wp_enqueue_style('ps-plugin-specs');
 	wp_add_inline_style('ps-plugin-specs', $css);
