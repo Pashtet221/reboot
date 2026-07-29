@@ -16,6 +16,7 @@
  */
 
 require get_template_directory() . '/inc/init.php';
+require get_template_directory() . '/inc/acf-related-posts.php';
 
 
 add_action('wp_enqueue_scripts', function () {
