@@ -1407,6 +1407,133 @@ function ps_enqueue_plugin_specs_styles() {
 }
 
 /**
+ * Загружаемые материалы и блок действий на страницах плагинов.
+ */
+add_action('acf/init', 'ps_register_plugin_downloads_acf_fields');
+function ps_register_plugin_downloads_acf_fields() {
+	if (!function_exists('acf_add_local_field_group')) {
+		return;
+	}
+
+	acf_add_local_field_group([
+		'key' => 'group_ps_plugin_downloads',
+		'title' => 'Видео и бесплатная версия',
+		'fields' => [
+			[
+				'key' => 'field_ps_plugin_video',
+				'label' => 'Видео о плагине',
+				'name' => 'ps_plugin_video',
+				'type' => 'file',
+				'instructions' => 'Загрузите демонстрационное видео. Если поле пустое, видеоблок на странице не выводится.',
+				'return_format' => 'array',
+				'library' => 'all',
+				'mime_types' => 'mp4,webm,ogv,mov',
+			],
+			[
+				'key' => 'field_ps_plugin_archive',
+				'label' => 'Архив бесплатной версии',
+				'name' => 'ps_plugin_archive',
+				'type' => 'file',
+				'instructions' => 'Загрузите ZIP-архив плагина. Имя загруженного файла автоматически появится на кнопке скачивания.',
+				'return_format' => 'array',
+				'library' => 'all',
+				'mime_types' => 'zip',
+			],
+		],
+		'location' => [
+			[
+				[
+					'param' => 'post_type',
+					'operator' => '==',
+					'value' => 'plugin',
+				],
+			],
+		],
+	]);
+}
+
+function ps_get_plugin_file($field_name, $post_id) {
+	$file = function_exists('get_field') ? get_field($field_name, $post_id) : get_post_meta($post_id, $field_name, true);
+
+	if (is_numeric($file)) {
+		$file = [
+			'url' => wp_get_attachment_url((int) $file),
+			'filename' => basename((string) get_attached_file((int) $file)),
+			'mime_type' => get_post_mime_type((int) $file),
+		];
+	} elseif (is_string($file)) {
+		$file = ['url' => $file];
+	}
+
+	if (empty($file['url'])) {
+		return null;
+	}
+
+	$file['filename'] = !empty($file['filename']) ? $file['filename'] : basename((string) wp_parse_url($file['url'], PHP_URL_PATH));
+	return $file;
+}
+
+function ps_render_plugin_downloads() {
+	if (!is_singular('plugin')) {
+		return;
+	}
+
+	$post_id = get_queried_object_id();
+	$video = ps_get_plugin_file('ps_plugin_video', $post_id);
+	$archive = ps_get_plugin_file('ps_plugin_archive', $post_id);
+	$contacts_page = get_page_by_path('contacts');
+	$contacts_url = $contacts_page ? get_permalink($contacts_page) : home_url('/contacts/');
+	?>
+	<section class="ps-plugin-downloads" aria-labelledby="ps-plugin-downloads-title">
+		<div class="container">
+			<?php if ($video) : ?>
+				<div class="ps-plugin-downloads__video">
+					<div class="ps-plugin-downloads__heading">
+						<span>Видеообзор</span>
+						<h2 id="ps-plugin-downloads-title">Посмотрите плагин в работе</h2>
+						<p>Короткая демонстрация поможет познакомиться с возможностями и интерфейсом плагина до установки.</p>
+					</div>
+					<video controls preload="metadata" playsinline>
+						<source src="<?php echo esc_url($video['url']); ?>"<?php echo !empty($video['mime_type']) ? ' type="' . esc_attr($video['mime_type']) . '"' : ''; ?>>
+						Ваш браузер не поддерживает воспроизведение видео.
+					</video>
+					<p class="ps-plugin-downloads__caption">Запустите видео, чтобы увидеть основные сценарии использования.</p>
+				</div>
+			<?php else : ?>
+				<h2 id="ps-plugin-downloads-title" class="screen-reader-text">Скачать плагин или купить Pro</h2>
+			<?php endif; ?>
+
+			<div class="ps-plugin-downloads__actions">
+				<?php if ($archive) : ?>
+					<div class="ps-plugin-downloads__action">
+						<a class="ps-plugin-downloads__button ps-plugin-downloads__button--download" href="<?php echo esc_url($archive['url']); ?>" download="<?php echo esc_attr($archive['filename']); ?>">Скачать бесплатно — <?php echo esc_html($archive['filename']); ?></a>
+						<p>Скачайте готовый архив и установите его через раздел «Плагины» в админке WordPress.</p>
+					</div>
+				<?php endif; ?>
+				<div class="ps-plugin-downloads__action">
+					<a class="ps-plugin-downloads__button ps-plugin-downloads__button--pro" href="<?php echo esc_url($contacts_url); ?>">Купить Pro</a>
+					<p>Нужны расширенные возможности или помощь с внедрением? Напишите нам — обсудим задачу и условия.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+	<?php
+}
+add_action('get_footer', 'ps_render_plugin_downloads', 5);
+
+add_action('wp_enqueue_scripts', 'ps_enqueue_plugin_downloads_styles');
+function ps_enqueue_plugin_downloads_styles() {
+	if (!is_singular('plugin')) {
+		return;
+	}
+
+	$css = '.ps-plugin-downloads{padding:64px 0;background:#f8fafc;color:#0f172a}.ps-plugin-downloads__video{margin-bottom:28px;padding:32px;border:1px solid rgba(15,23,42,.08);border-radius:28px;background:#fff;box-shadow:0 18px 50px rgba(15,23,42,.06)}.ps-plugin-downloads__heading{max-width:760px;margin-bottom:24px}.ps-plugin-downloads__heading span{display:inline-block;margin-bottom:10px;color:#2563eb;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}.ps-plugin-downloads__heading h2{margin:0 0 12px;font-size:clamp(28px,3vw,40px);line-height:1.15}.ps-plugin-downloads__heading p,.ps-plugin-downloads__caption,.ps-plugin-downloads__action p{margin:0;color:#64748b;font-size:16px;line-height:1.65}.ps-plugin-downloads__video video{display:block;width:100%;max-height:680px;border-radius:18px;background:#0f172a}.ps-plugin-downloads__caption{margin-top:14px}.ps-plugin-downloads__actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.ps-plugin-downloads__action{display:flex;flex-direction:column;align-items:flex-start;padding:28px;border:1px solid rgba(15,23,42,.08);border-radius:24px;background:#fff}.ps-plugin-downloads__button{display:inline-flex;align-items:center;justify-content:center;min-height:52px;margin-bottom:14px;padding:13px 22px;border-radius:14px;color:#fff;text-decoration:none;font-weight:800;line-height:1.3}.ps-plugin-downloads__button:hover{color:#fff;transform:translateY(-1px)}.ps-plugin-downloads__button--download{background:#16a34a}.ps-plugin-downloads__button--download:hover{background:#15803d}.ps-plugin-downloads__button--pro{background:#6c40ff}.ps-plugin-downloads__button--pro:hover{background:#5831dc}@media(max-width:700px){.ps-plugin-downloads{padding:44px 0}.ps-plugin-downloads__video{padding:20px}.ps-plugin-downloads__actions{grid-template-columns:1fr}.ps-plugin-downloads__button{width:100%;text-align:center}}';
+	wp_register_style('ps-plugin-downloads', false, [], null);
+	wp_enqueue_style('ps-plugin-downloads');
+	wp_add_inline_style('ps-plugin-downloads', $css);
+}
+
+/**
  * ACF поля для выбора похожих материалов на страницах плагинов.
  */
 add_action('acf/init', 'ps_register_plugin_related_acf_fields');
