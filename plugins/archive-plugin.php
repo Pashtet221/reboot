@@ -40,7 +40,7 @@ $archive_description = 'Каталог кастомных решений и ин
 								<?php if (has_post_thumbnail()) : ?>
 									<?php the_post_thumbnail('large', ['class' => 'ps-plugin-card__image']); ?>
 								<?php else : ?>
-									<div class="ps-plugin-card__image ps-plugin-card__image--placeholder"></div>
+									<?php get_template_part('template-parts/plugin/card-placeholder'); ?>
 								<?php endif; ?>
 							</a>
 
@@ -198,9 +198,111 @@ $archive_description = 'Каталог кастомных решений и ин
 }
 
 .ps-plugin-card__image--placeholder {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	width: 100%;
 	height: 100%;
-	background: linear-gradient(135deg, #dbeafe 0%, #e2e8f0 100%);
+	padding: 24px;
+	background: linear-gradient(145deg, #111c46 0%, #293a86 52%, #4d3bfe 100%);
+	color: #fff;
+	isolation: isolate;
+}
+
+.ps-plugin-card__placeholder-grid {
+	position: absolute;
+	inset: 0;
+	background-image: linear-gradient(rgba(255,255,255,.055) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.055) 1px, transparent 1px);
+	background-size: 30px 30px;
+	-webkit-mask-image: linear-gradient(to bottom right, #000, transparent 80%);
+	mask-image: linear-gradient(to bottom right, #000, transparent 80%);
+	z-index: -1;
+}
+
+.ps-plugin-card__placeholder-orb {
+	position: absolute;
+	border-radius: 50%;
+	filter: blur(2px);
+	z-index: -1;
+}
+
+.ps-plugin-card__placeholder-orb--one {
+	top: -38%;
+	right: -10%;
+	width: 190px;
+	height: 190px;
+	background: rgba(104, 225, 255, .24);
+}
+
+.ps-plugin-card__placeholder-orb--two {
+	bottom: -45%;
+	left: -6%;
+	width: 180px;
+	height: 180px;
+	background: rgba(162, 112, 255, .34);
+}
+
+.ps-plugin-card__placeholder-brand {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+}
+
+.ps-plugin-card__placeholder-logo {
+	display: grid;
+	place-items: center;
+	width: 64px;
+	height: 64px;
+	border: 1px solid rgba(255,255,255,.3);
+	border-radius: 18px;
+	background: rgba(255,255,255,.13);
+	box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 16px 32px rgba(5,10,35,.18);
+	backdrop-filter: blur(8px);
+}
+
+.ps-plugin-card__placeholder-logo svg {
+	width: 40px;
+	height: 40px;
+	fill: none;
+	stroke: #fff;
+	stroke-width: 4;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+}
+
+.ps-plugin-card__placeholder-copy {
+	display: flex;
+	flex-direction: column;
+	line-height: 1;
+}
+
+.ps-plugin-card__placeholder-copy strong {
+	font-size: 38px;
+	font-weight: 750;
+}
+
+.ps-plugin-card__placeholder-copy small {
+	margin-top: 7px;
+	color: rgba(255,255,255,.72);
+	font-size: 11px;
+	font-weight: 600;
+	letter-spacing: .1em;
+	text-transform: uppercase;
+}
+
+.ps-plugin-card__placeholder-badge {
+	position: absolute;
+	right: 18px;
+	bottom: 16px;
+	padding: 6px 10px;
+	border: 1px solid rgba(255,255,255,.18);
+	border-radius: 999px;
+	background: rgba(8,15,46,.25);
+	color: rgba(255,255,255,.82);
+	font-size: 10px;
+	font-weight: 600;
+	letter-spacing: .04em;
 }
 
 .ps-plugin-card__content {
