@@ -1,6 +1,6 @@
 <?php
 /**
- * Manually selected related posts powered by ACF.
+ * Manually selected related plugins powered by ACF.
  *
  * @package reboot
  */
@@ -8,7 +8,7 @@
 add_action( 'acf/init', 'reboot_register_selected_related_posts_fields' );
 
 /**
- * Register the relationship field on regular posts.
+ * Register the plugin relationship field on regular posts.
  */
 function reboot_register_selected_related_posts_fields() {
     if ( ! function_exists( 'acf_add_local_field_group' ) ) {
@@ -17,15 +17,15 @@ function reboot_register_selected_related_posts_fields() {
 
     acf_add_local_field_group( array(
         'key'      => 'group_reboot_selected_related_posts',
-        'title'    => 'Рекомендуемые статьи',
+        'title'    => 'Рекомендуемые плагины',
         'fields'   => array(
             array(
                 'key'           => 'field_reboot_selected_related_posts',
-                'label'         => 'Статьи',
+                'label'         => 'Плагины',
                 'name'          => 'reboot_selected_related_posts',
                 'type'          => 'relationship',
-                'instructions'  => 'Выберите и расположите в нужном порядке статьи, которые будут показаны в конце записи.',
-                'post_type'     => array( 'post' ),
+                'instructions'  => 'Выберите и расположите в нужном порядке плагины, которые будут показаны в конце записи.',
+                'post_type'     => array( 'plugin' ),
                 'post_status'   => array( 'publish' ),
                 'filters'       => array( 'search', 'taxonomy' ),
                 'return_format' => 'id',
@@ -44,7 +44,7 @@ function reboot_register_selected_related_posts_fields() {
 }
 
 /**
- * Get selected post IDs in the order set in ACF.
+ * Get selected plugin IDs in the order set in ACF.
  *
  * @param int $post_id Current post ID.
  * @return int[]

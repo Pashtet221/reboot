@@ -1,6 +1,6 @@
 <?php
 /**
- * Posts manually selected in the ACF relationship field.
+ * Plugins manually selected in the ACF relationship field.
  *
  * @package reboot
  */
@@ -12,7 +12,7 @@ if ( empty( $selected_post_ids ) ) {
 }
 
 $selected_posts = new WP_Query( array(
-    'post_type'           => 'post',
+    'post_type'           => 'plugin',
     'post_status'         => 'publish',
     'post__in'            => $selected_post_ids,
     'orderby'             => 'post__in',
@@ -26,7 +26,7 @@ if ( ! $selected_posts->have_posts() ) {
 ?>
 
 <div class="related-posts related-posts--selected fixed">
-    <div class="related-posts__header">Рекомендуем прочитать</div>
+    <div class="related-posts__header">Рекомендуемые плагины</div>
     <div class="post-cards post-cards--vertical">
         <?php
         $card_number = 0;
