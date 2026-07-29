@@ -116,7 +116,7 @@ $archive_description = 'Каталог кастомных решений и ин
 
 .ps-plugin-archive__hero {
 	padding: 56px 0 32px;
-	background: linear-gradient(180deg, #ffffff 0%, #f3f6fb 100%);
+	background: #fff;
 	border-bottom: 1px solid rgba(15, 23, 42, 0.06);
 }
 
@@ -371,7 +371,7 @@ $archive_description = 'Каталог кастомных решений и ин
 	min-height: 46px;
 	padding: 0 18px;
 	border-radius: 12px;
-	background: #2563eb;
+	background: #4d3bfe;
 	color: #fff;
 	font-size: 15px;
 	font-weight: 600;
@@ -379,8 +379,10 @@ $archive_description = 'Каталог кастомных решений и ин
 	transition: background 0.25s ease, transform 0.25s ease;
 }
 
-.ps-plugin-card__button:hover {
-	background: #1d4ed8;
+.ps-plugin-card__button:hover,
+.ps-plugin-card__button:focus-visible {
+	background: #3927db;
+	color: #fff;
 	transform: translateY(-1px);
 }
 
