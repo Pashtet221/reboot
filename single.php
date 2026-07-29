@@ -102,6 +102,8 @@ get_header();
 
     <?php endwhile; ?>
 
+    <?php get_template_part( 'template-parts/selected-related-posts' ); ?>
+
     <?php if ( $is_show_related_posts ) get_template_part( 'template-parts/related', 'posts' ) ?>
 
 <?php
