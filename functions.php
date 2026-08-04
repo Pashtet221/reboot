@@ -1263,6 +1263,7 @@ function ps_register_plugin_post_type() {
 			'excerpt',
 			'thumbnail',
 			'page-attributes',
+			'comments',
 		),
 		'has_archive'        => 'wp-plugins',
 		'rewrite'            => array(
@@ -1280,6 +1281,33 @@ function ps_register_plugin_post_type() {
 
 	register_post_type('plugin', $args);
 }
+
+/**
+ * Use the native WordPress comments as a support discussion under every plugin.
+ * Keeping the standard comment form makes the section compatible with moderation,
+ * threaded replies, antispam tools and a CAPTCHA plugin added later.
+ */
+function ps_render_plugin_discussion() {
+	if (!is_singular('plugin') || post_password_required()) {
+		return;
+	}
+
+	comments_template('/plugin-comments.php');
+}
+add_action('get_footer', 'ps_render_plugin_discussion', 10);
+
+function ps_enqueue_plugin_discussion_styles() {
+	if (!is_singular('plugin')) {
+		return;
+	}
+
+	$css = '.ps-plugin-discussion{padding:64px 0;background:#fff;color:#0f172a}.ps-plugin-discussion .container{box-sizing:border-box;padding-left:20px;padding-right:20px}.ps-plugin-discussion__inner{max-width:900px;padding:34px;border:1px solid rgba(15,23,42,.08);border-radius:28px;background:#fff;box-shadow:0 18px 50px rgba(15,23,42,.06)}.ps-plugin-discussion__heading{margin-bottom:28px;padding-bottom:24px;border-bottom:1px solid rgba(15,23,42,.08)}.ps-plugin-discussion__heading h2{margin:0 0 12px;color:#0f172a;font-size:clamp(28px,3vw,40px);line-height:1.15}.ps-plugin-discussion__heading p{margin:0;color:#64748b;font-size:17px;line-height:1.65}.ps-plugin-discussion .comment-list{margin:0 0 34px;padding:0;list-style:none}.ps-plugin-discussion .comment-list .children{margin:20px 0 0 32px;padding:0;list-style:none}.ps-plugin-discussion .comment-body{margin-bottom:18px;padding:22px;border-radius:18px;background:#f8fafc}.ps-plugin-discussion .comment-avatar{float:left;margin-right:14px}.ps-plugin-discussion .comment-avatar img{border-radius:50%}.ps-plugin-discussion .comment-meta{min-height:60px}.ps-plugin-discussion .comment-author{color:#0f172a;font-style:normal;font-weight:800}.ps-plugin-discussion .comment-time{display:block;color:#94a3b8;font-size:13px}.ps-plugin-discussion .comment-content{clear:both;padding-top:12px;color:#334155;line-height:1.7}.ps-plugin-discussion .reply{margin-top:12px;color:#4d3bfe;font-weight:700;cursor:pointer}.ps-plugin-discussion .comment-reply-title{margin:0 0 18px;font-size:24px;font-weight:800}.ps-plugin-discussion .comment-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.ps-plugin-discussion .comment-form p{margin:0}.ps-plugin-discussion .comment-form-comment,.ps-plugin-discussion .form-submit,.ps-plugin-discussion .logged-in-as,.ps-plugin-discussion .comment-notes,.ps-plugin-discussion .comment-form-cookies-consent{grid-column:1/-1}.ps-plugin-discussion input[type=text],.ps-plugin-discussion input[type=email],.ps-plugin-discussion input[type=url],.ps-plugin-discussion textarea{box-sizing:border-box;width:100%;padding:14px 16px;border:1px solid #cbd5e1;border-radius:12px;background:#fff;color:#0f172a}.ps-plugin-discussion textarea{min-height:150px;resize:vertical}.ps-plugin-discussion input:focus,.ps-plugin-discussion textarea:focus{outline:2px solid rgba(77,59,254,.2);border-color:#4d3bfe}.ps-plugin-discussion .submit{min-height:50px;padding:0 22px;border:0;border-radius:12px;background:#4d3bfe;color:#fff;font-weight:800;cursor:pointer}.ps-plugin-discussion .submit:hover{background:#3927db}.ps-plugin-discussion__closed{margin:0;color:#64748b}@media(max-width:640px){.ps-plugin-discussion{padding:44px 0}.ps-plugin-discussion .container{padding-left:16px;padding-right:16px}.ps-plugin-discussion__inner{padding:22px}.ps-plugin-discussion .comment-form{grid-template-columns:1fr}.ps-plugin-discussion .comment-list .children{margin-left:14px}}';
+
+	wp_register_style('ps-plugin-discussion', false, array(), null);
+	wp_enqueue_style('ps-plugin-discussion');
+	wp_add_inline_style('ps-plugin-discussion', $css);
+}
+add_action('wp_enqueue_scripts', 'ps_enqueue_plugin_discussion_styles');
 
 /**
  * Регистрация таксономии категорий для плагинов
