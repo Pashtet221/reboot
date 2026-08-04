@@ -52,7 +52,7 @@ add_theme_support( 'custom-logo', [
 
 /**
  * Shortcode: [why_plugins]
- * Блок "Почему выбирают наши плагины?"
+ * Блок "Бесплатно — не значит без качества?"
  */
 add_shortcode('why_plugins', function () {
 
@@ -60,7 +60,7 @@ add_shortcode('why_plugins', function () {
 
     <section class="whyPlugins">
         <div class="whyPlugins__container">
-            <h2 class="whyPlugins__title">Почему выбирают наши плагины</h2>
+            <h2 class="whyPlugins__title">Бесплатно — не значит без качества</h2>
 
             <div class="whyPlugins__grid wpds-fade-group" data-step="120">
 
@@ -100,8 +100,8 @@ add_shortcode('why_plugins', function () {
                     </div>
                     <h3 class="whyPlugins__cardTitle">Поддержка от разработчика</h3>
                     <p class="whyPlugins__cardText">
-                        Общаетесь напрямую с тем, кто пишет код.
-                        Без шаблонных ответов и очереди из менеджеров.
+                        Базовые вопросы по установке можно задать напрямую разработчику.
+                        Оплата нужна только для индивидуальной доработки.
                     </p>
                 </article>
 
@@ -245,7 +245,7 @@ JS);
 
 /**
  * Shortcode: [wps_hero]
- * Hero-блок "Премиум темы и плагины для WordPress"
+ * Hero-блок бесплатных плагинов WordPress.
  */
 add_shortcode('wps_hero', function () {
 
@@ -257,20 +257,20 @@ add_shortcode('wps_hero', function () {
 
             <div class="wpsHero__content">
     <h2 class="wpsHero__title">
-        Плагины и готовые решения<br>
+        Бесплатные плагины<br>
         для WordPress и WooCommerce
         <span class="wpsHero__titleLine"></span>
     </h2>
 
     <p class="wpsHero__text">
-        Разрабатываю кастомные плагины с 2022 года: автозаполнение,
-        многошаговый чекаут, интеграции с CDEK и DaData.<br>
-        Чистый код, быстрая установка, поддержка от разработчика.
+        Скачивайте готовые решения без оплаты и подписки: автозаполнение,
+        чекаут, доставка, карты и другие инструменты.<br>
+        Платить нужно только за индивидуальную доработку, если она понадобится.
     </p>
 
     <p class="wpsHero__trust">
-        <a class="wpsHero__btn wpsHero__btn--primary" href="/wp-plugins/">Смотреть плагины →</a>
-        <a class="wpsHero__btn wpsHero__btn--ghost" href="/contacts/">Написать по задаче</a>
+        <a class="wpsHero__btn wpsHero__btn--primary" href="/wp-plugins/">Выбрать плагин бесплатно →</a>
+        <a class="wpsHero__btn wpsHero__btn--ghost" href="/contacts/">Заказать доработку</a>
     </p>
 </div>
         </div>
@@ -394,7 +394,7 @@ add_action('wp_enqueue_scripts', function () {
 
 /**
  * Shortcode: [top_month_plugins]
- * Блок "Чаще покупают за последний месяц"
+ * Блок популярных бесплатных плагинов.
  */
 add_shortcode('top_month_plugins', function () {
 
@@ -402,13 +402,13 @@ add_shortcode('top_month_plugins', function () {
 
     <section class="topMonth">
         <div class="topMonth__container">
-            <h2 class="topMonth__title">Популярные решения</h2>
+            <h2 class="topMonth__title">Популярные бесплатные плагины</h2>
 
             <div class="topMonth__grid wpds-fade-group" data-step="120">
 
                 <!-- DaData -->
                 <article class="pCard pCard--green wpds-fade-item">
-                    <span class="pCard__badge pCard__badge--green">Лидер продаж</span>
+                    <span class="pCard__badge pCard__badge--green">Бесплатно</span>
 
                     <div class="pCard__row">
                         <div class="pCard__iconBox pCard__iconBox--green">
@@ -430,7 +430,7 @@ add_shortcode('top_month_plugins', function () {
                                 <span>Автозаполнение</span><span class="pCard__dot">·</span><span>WooCommerce</span>
                             </div>
 
-                            <a class="pCard__btn pCard__btn--green" href="https://plugins-store.ru/wp-plugins/dadata-dlya-woocommerce-avtozapolnenie-adresa-i-inn/">Подробнее →</a>
+                            <a class="pCard__btn pCard__btn--green" href="https://plugins-store.ru/wp-plugins/dadata-dlya-woocommerce-avtozapolnenie-adresa-i-inn/">Скачать бесплатно →</a>
                         </div>
                     </div>
                 </article>
@@ -457,7 +457,7 @@ add_shortcode('top_month_plugins', function () {
                                 <span>Чекаут</span><span class="pCard__dot">·</span><span>Конверсия</span>
                             </div>
 
-                            <a class="pCard__btn pCard__btn--purple" href="https://plugins-store.ru/wp-plugins/kastomnyj-checkout-dlya-woocommerce-razrabotka-pod-vash-proekt/">Подробнее →</a>
+                            <a class="pCard__btn pCard__btn--purple" href="https://plugins-store.ru/wp-plugins/kastomnyj-checkout-dlya-woocommerce-razrabotka-pod-vash-proekt/">Скачать бесплатно →</a>
                         </div>
                     </div>
                 </article>
@@ -484,7 +484,7 @@ add_shortcode('top_month_plugins', function () {
                                 <span>Доставка</span><span class="pCard__dot">·</span><span>WooCommerce</span>
                             </div>
 
-                            <a class="pCard__btn pCard__btn--blue" href="https://plugins-store.ru/wp-plugins/integracziya-cdek-dlya-woocommerce-podklyuchenie-i-dorabotka-dostavki/">Подробнее →</a>
+                            <a class="pCard__btn pCard__btn--blue" href="https://plugins-store.ru/wp-plugins/integracziya-cdek-dlya-woocommerce-podklyuchenie-i-dorabotka-dostavki/">Скачать бесплатно →</a>
                         </div>
                     </div>
                 </article>
@@ -512,7 +512,7 @@ add_shortcode('top_month_plugins', function () {
                                 <span>Маркетплейсы</span><span class="pCard__dot">·</span><span>HivePress</span>
                             </div>
 
-                            <a class="pCard__btn pCard__btn--purpleOutline" href="https://plugins-store.ru/wp-plugins/hivepress-map-listings-obyavleniya-na-karte/">Подробнее →</a>
+                            <a class="pCard__btn pCard__btn--purpleOutline" href="https://plugins-store.ru/wp-plugins/hivepress-map-listings-obyavleniya-na-karte/">Скачать бесплатно →</a>
                         </div>
                     </div>
                 </article>
@@ -578,7 +578,7 @@ add_action('wp_enqueue_scripts', function () {
 add_shortcode('wpds_trust', function () {
     $items = [
         ['num' => '4+', 'label' => 'года в разработке WordPress-плагинов'],
-        ['num' => '500+', 'label' => 'установок на сайтах клиентов'],
+        ['num' => '0 ₽', 'label' => 'за скачивание и использование готовых плагинов'],
         ['num' => '5.0 ★', 'label' => 'средний рейтинг продуктов'],
         ['num' => '0', 'label' => 'шаблонных ответов — только живой разработчик'],
     ];
@@ -598,19 +598,19 @@ add_shortcode('wpds_trust', function () {
 
 /**
  * Shortcode: [wpds_workflow]
- * Секция "Как проходит работа".
+ * Секция "От бесплатного плагина к готовому решению".
  */
 add_shortcode('wpds_workflow', function () {
     $steps = [
-        ['title' => 'Разбираемся в задаче', 'text' => 'Вы описываете проблему или пишете ТЗ. Если нужно — помогаем сформулировать требования и предлагаем несколько вариантов решения.'],
-        ['title' => 'Подбираем или разрабатываем решение', 'text' => 'Смотрим, подойдёт ли готовый плагин или нужна доработка. Называем сроки и стоимость до старта — без неожиданностей.'],
-        ['title' => 'Устанавливаем и настраиваем', 'text' => 'Внедряем на ваш сайт, проверяем совместимость с темой и другими плагинами, тестируем на реальных сценариях.'],
-        ['title' => 'Поддерживаем после сдачи', 'text' => 'Отвечаем на вопросы, выпускаем обновления, помогаем с настройкой под изменения в проекте.'],
+        ['title' => 'Выбираете плагин', 'text' => 'Находите подходящее решение в каталоге и смотрите описание, видео и системные требования.'],
+        ['title' => 'Скачиваете бесплатно', 'text' => 'Получаете готовый плагин без оплаты, лицензионного ключа и обязательной подписки.'],
+        ['title' => 'Устанавливаете и проверяете', 'text' => 'Добавляете плагин на сайт, настраиваете его и проверяете на реальных сценариях. Базовая установка не требует разработчика.'],
+        ['title' => 'Заказываете только нужное', 'text' => 'Если проекту нужна особая логика, интеграция или адаптация, отдельно обсуждаем и оцениваем доработку.'],
     ];
     ob_start(); ?>
     <section class="wpdsWorkflow">
         <div class="wpdsWorkflow__container">
-            <h2 class="wpdsWorkflow__title">Как проходит работа</h2>
+            <h2 class="wpdsWorkflow__title">От бесплатного плагина к готовому решению</h2>
             <div class="wpdsWorkflow__grid wpds-fade-group" data-step="120">
                 <?php foreach ($steps as $index => $step): ?>
                     <article class="wpdsWorkflow__card wpds-fade-item">
@@ -632,10 +632,10 @@ add_shortcode('wpds_workflow', function () {
 add_shortcode('wpds_faq', function () {
     $items = [
         ['q' => 'Плагины подойдут к моей теме?', 'a' => 'Да. Плагины разработаны без привязки к конкретным темам и не переопределяют стили без необходимости. Работают с Astra, Flatsome, OceanWP, кастомными темами и большинством других.'],
-        ['q' => 'Как получить поддержку после покупки?', 'a' => 'Пишите напрямую в мессенджер или по email. Отвечаем в рабочее время, обычно в течение нескольких часов. Технические вопросы решаем, а не перекидываем на документацию.'],
+        ['q' => 'Плагины действительно бесплатные?', 'a' => 'Да. Готовые версии можно скачать и использовать без оплаты и обязательной подписки. Деньги берём только за индивидуальную разработку или доработку под ваш проект.'],
         ['q' => 'Возможна ли доработка под мой проект?', 'a' => 'Да, это основное направление работы. Опишите задачу — разберём, что нужно изменить или добавить, и назовём стоимость.'],
         ['q' => 'Как часто выходят обновления?', 'a' => 'Регулярно, с 2022 года. При обновлении WordPress или WooCommerce проверяем совместимость и выпускаем патч при необходимости.'],
-        ['q' => 'Можно ли купить плагин и самому установить?', 'a' => 'Конечно. После оплаты получаете файл плагина и инструкцию по установке. Если возникнут вопросы — поможем.'],
+        ['q' => 'Можно ли самому установить плагин?', 'a' => 'Конечно. Скачайте архив со страницы плагина и установите его через панель WordPress. Если готового функционала не хватит, можно заказать доработку.'],
     ];
     ob_start(); ?>
     <section class="wpdsFaq">
@@ -662,11 +662,11 @@ add_shortcode('wpds_cta', function () {
     ob_start(); ?>
     <section class="wpdsCta">
         <div class="wpdsCta__box">
-            <h2>Есть задача под WordPress?</h2>
-            <p>Опишите, что нужно сделать — разберёмся, подберём решение и назовём стоимость. Без лишних вопросов и шаблонных ответов.</p>
+            <h2>Начните с бесплатного решения</h2>
+            <p>Скачайте готовый плагин из каталога. Если потребуется новая функция, интеграция или решение с нуля — обсудим индивидуальную разработку.</p>
             <div class="wpdsCta__actions">
-                <a class="wpdsCta__btn wpdsCta__btn--primary" href="/contacts/">Написать о задаче →</a>
-                <a class="wpdsCta__btn wpdsCta__btn--ghost" href="/wp-plugins/">Смотреть готовые плагины</a>
+                <a class="wpdsCta__btn wpdsCta__btn--primary" href="/wp-plugins/">Скачать плагин бесплатно →</a>
+                <a class="wpdsCta__btn wpdsCta__btn--ghost" href="/contacts/">Обсудить доработку</a>
             </div>
         </div>
     </section>
