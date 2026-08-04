@@ -22,7 +22,39 @@ use Wpshop\Core\Partner;
 use Wpshop\Core\ViewsCounter;
 
 
-require get_template_directory() . '/vendor/autoload.php';
+$vendor_directory = get_template_directory() . '/vendor';
+$composer_autoloader = $vendor_directory . '/autoload.php';
+
+if ( is_readable( $composer_autoloader ) ) {
+    require_once $composer_autoloader;
+} else {
+    /**
+     * Keep the theme bootable when an upload omits Composer's generated files.
+     * The Wpshop packages themselves are distributed with the theme, so their
+     * PSR-4 source trees can be loaded directly as a safe fallback.
+     */
+    spl_autoload_register( static function ( $class_name ) use ( $vendor_directory ) {
+        $prefixes = array(
+            'Wpshop\\Core\\'          => $vendor_directory . '/wpshop/core/src/',
+            'Wpshop\\SimpleHtmlDom\\' => $vendor_directory . '/wpshop/simple-html-dom/src/',
+        );
+
+        foreach ( $prefixes as $prefix => $source_directory ) {
+            if ( 0 !== strpos( $class_name, $prefix ) ) {
+                continue;
+            }
+
+            $relative_class = substr( $class_name, strlen( $prefix ) );
+            $class_file     = $source_directory . str_replace( '\\', '/', $relative_class ) . '.php';
+
+            if ( is_readable( $class_file ) ) {
+                require_once $class_file;
+            }
+
+            return;
+        }
+    } );
+}
 
 
 /**
