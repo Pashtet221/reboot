@@ -1283,6 +1283,32 @@ function ps_register_plugin_post_type() {
 }
 
 /**
+ * Обсуждения являются частью страниц плагинов, поэтому они должны быть
+ * доступны и у записей, созданных до добавления поддержки комментариев.
+ */
+function ps_plugin_comments_open($open, $post_id) {
+	if ('plugin' === get_post_type($post_id)) {
+		return true;
+	}
+
+	return $open;
+}
+add_filter('comments_open', 'ps_plugin_comments_open', 10, 2);
+
+/**
+ * Сразу открываем комментарии у новых плагинов независимо от общей настройки
+ * WordPress «Разрешить оставлять комментарии для новых записей».
+ */
+function ps_plugin_default_comment_status($status, $post_type, $comment_type) {
+	if ('plugin' === $post_type && 'comment' === $comment_type) {
+		return 'open';
+	}
+
+	return $status;
+}
+add_filter('get_default_comment_status', 'ps_plugin_default_comment_status', 10, 3);
+
+/**
  * Выводим нативное обсуждение WordPress на каждой странице плагина.
  * Комментарии остаются доступны в общей админке и совместимы с модерацией,
  * древовидными ответами и будущими антиспам-плагинами.
