@@ -15,7 +15,7 @@ $query = new WP_Query([
 $post_type_obj = get_post_type_object('plugin');
 $archive_title = $post_type_obj && !empty($post_type_obj->labels->name) ? $post_type_obj->labels->name : 'Плагины';
 $archive_description = 'Бесплатные плагины для WordPress и WooCommerce, которые можно скачать без регистрации. Для каждого решения есть описание, документация и понятные инструкции по запуску.';
-$development_url = home_url('/plugin-development/');
+$development_url = 'https://plugins-store.ru/razrabotka-plagina-pod-klyuch/';
 $contacts_url    = home_url('/contacts/');
 ?>
 
@@ -208,12 +208,14 @@ $contacts_url    = home_url('/contacts/');
 .ps-plugin-archive__trust { display:flex; flex-wrap:wrap; gap:24px; margin:28px 0 0; padding:0; list-style:none; color:#475569; font-size:14px; font-weight:600; }
 .ps-plugin-archive__trust li { position:relative; padding-left:22px; }
 .ps-plugin-archive__trust li::before { content:'✓'; position:absolute; left:0; color:#16a34a; font-weight:900; }
-.ps-plugin-archive__how { padding:64px 0; background:#0f172a; color:#fff; }
+.ps-plugin-archive__how { padding:72px 0; background:#0f172a; color:#fff; }
+.ps-plugin-archive__how>.container { width:min(calc(100% - 40px),1240px); margin-inline:auto; }
+.ps-plugin-archive__section-heading { max-width:860px; }
 .ps-plugin-archive__section-heading p,.ps-plugin-archive__catalog-heading p,.ps-plugin-archive__cta-inner>div>p { margin:0 0 8px; color:#8b7fff; font-size:13px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; }
 .ps-plugin-archive__section-heading h2,.ps-plugin-archive__catalog-heading h2 { margin:0; font-size:clamp(28px,3vw,38px); line-height:1.15; }
-.ps-plugin-archive__steps { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; margin-top:34px; }
-.ps-plugin-archive__step { display:flex; gap:16px; padding:22px; border:1px solid rgba(255,255,255,.1); border-radius:18px; background:rgba(255,255,255,.04); }
-.ps-plugin-archive__step>span { color:#8b7fff; font-weight:800; }
+.ps-plugin-archive__steps { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; margin-top:40px; }
+.ps-plugin-archive__step { display:flex; align-items:flex-start; gap:16px; min-height:176px; padding:28px; border:1px solid rgba(255,255,255,.1); border-radius:18px; background:rgba(255,255,255,.04); }
+.ps-plugin-archive__step>span { flex:0 0 auto; color:#8b7fff; font-weight:800; }
 .ps-plugin-archive__step h3 { margin:0 0 8px; color:#fff; font-size:18px; }
 .ps-plugin-archive__step p { margin:0; color:#94a3b8; line-height:1.6; font-size:14px; }
 
@@ -448,7 +450,7 @@ $contacts_url    = home_url('/contacts/');
 .ps-plugin-card__details { color:#475569; font-size:14px; font-weight:700; text-decoration:none; }
 .ps-plugin-card__details:hover { color:#4d3bfe; }
 .ps-plugin-card__footer .ps-plugin-card__button { margin-top:0; min-height:42px; }
-.ps-plugin-archive__cta { padding:0 0 72px; background:#f8fafc; }
+.ps-plugin-archive__cta { padding:72px 0; background:#f8fafc; }
 .ps-plugin-archive__cta-inner { display:flex; align-items:center; justify-content:space-between; gap:36px; padding:42px; border-radius:28px; background:linear-gradient(135deg,#4d3bfe,#312e81); color:#fff; }
 .ps-plugin-archive__cta-inner h2 { margin:0 0 12px; color:#fff; font-size:clamp(28px,3vw,40px); }
 .ps-plugin-archive__cta-inner>div>div { max-width:720px; color:#dddafa; line-height:1.7; }
@@ -522,11 +524,15 @@ $contacts_url    = home_url('/contacts/');
 	}
 	.ps-plugin-archive__trust { display:grid; gap:10px; }
 	.ps-plugin-archive__how { padding:44px 0; }
+	.ps-plugin-archive__how>.container { width:min(calc(100% - 32px),1240px); }
+	.ps-plugin-archive__steps { margin-top:28px; }
+	.ps-plugin-archive__step { min-height:0; padding:22px; }
 	.ps-plugin-archive__catalog-heading { display:block; }
 	.ps-plugin-archive__catalog-heading>span { display:block; margin-top:10px; }
 	.ps-plugin-card__footer { align-items:stretch; flex-direction:column; }
 	.ps-plugin-archive__cta-inner { display:block; padding:28px 22px; }
 	.ps-plugin-archive__cta-inner>a { margin-top:24px; justify-content:center; }
+	.ps-plugin-archive__cta { padding:48px 0; }
 
 	.ps-plugin-archive__content {
 		padding-top: 24px;
