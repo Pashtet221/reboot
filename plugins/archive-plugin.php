@@ -14,29 +14,60 @@ $query = new WP_Query([
 
 $post_type_obj = get_post_type_object('plugin');
 $archive_title = $post_type_obj && !empty($post_type_obj->labels->name) ? $post_type_obj->labels->name : 'Плагины';
-$archive_description = 'Каталог кастомных решений и интеграций для WordPress и WooCommerce: checkout, CDEK, DaData, HivePress и другие плагины под проект.';
+$archive_description = 'Бесплатные плагины для WordPress и WooCommerce, которые можно скачать без регистрации. Для каждого решения есть описание, документация и понятные инструкции по запуску.';
+$development_url = home_url('/plugin-development/');
+$contacts_url    = home_url('/contacts/');
 ?>
 
 <main class="ps-plugin-archive">
 	<section class="ps-plugin-archive__hero">
 		<div class="container">
 			<div class="ps-plugin-archive__hero-inner">
-				<p class="ps-plugin-archive__eyebrow">Каталог решений</p>
-				<h1 class="ps-plugin-archive__title"><?php echo esc_html($archive_title); ?></h1>
+				<p class="ps-plugin-archive__eyebrow">Открытая библиотека плагинов</p>
+				<h1 class="ps-plugin-archive__title">Готовые плагины.<br><span>Бесплатно для всех.</span></h1>
 				<div class="ps-plugin-archive__description">
 					<p><?php echo esc_html($archive_description); ?></p>
 				</div>
+				<div class="ps-plugin-archive__actions">
+					<a class="ps-plugin-archive__button ps-plugin-archive__button--primary" href="#plugin-catalog">Выбрать плагин</a>
+					<a class="ps-plugin-archive__button ps-plugin-archive__button--secondary" href="<?php echo esc_url($development_url); ?>">Заказать разработку</a>
+				</div>
+				<ul class="ps-plugin-archive__trust" aria-label="Преимущества библиотеки">
+					<li>Без регистрации</li>
+					<li>Документация внутри</li>
+					<li>Можно доработать под проект</li>
+				</ul>
 			</div>
 		</div>
 	</section>
 
-	<section class="ps-plugin-archive__content">
+	<section class="ps-plugin-archive__how" aria-labelledby="how-it-works-title">
 		<div class="container">
+			<div class="ps-plugin-archive__section-heading">
+				<p>Всё просто</p>
+				<h2 id="how-it-works-title">От готового решения к нужному результату</h2>
+			</div>
+			<div class="ps-plugin-archive__steps">
+				<div class="ps-plugin-archive__step"><span>01</span><div><h3>Выберите плагин</h3><p>Посмотрите возможности, совместимость и сценарии использования.</p></div></div>
+				<div class="ps-plugin-archive__step"><span>02</span><div><h3>Скачайте бесплатно</h3><p>Получите архив без оплаты, подписки и скрытых условий.</p></div></div>
+				<div class="ps-plugin-archive__step"><span>03</span><div><h3>Расширьте при необходимости</h3><p>Если базового функционала мало — закажите доработку под свой процесс.</p></div></div>
+			</div>
+		</div>
+	</section>
+
+	<section class="ps-plugin-archive__content" id="plugin-catalog">
+		<div class="container">
+			<div class="ps-plugin-archive__catalog-heading">
+				<div><p>Каталог</p><h2><?php echo esc_html($archive_title); ?></h2></div>
+				<span>Все решения доступны бесплатно</span>
+			</div>
 			<?php if ($query->have_posts()) : ?>
 				<div class="ps-plugin-grid">
 					<?php while ($query->have_posts()) : $query->the_post(); ?>
+						<?php $plugin_archive = function_exists('ps_get_plugin_file') ? ps_get_plugin_file('ps_plugin_archive', get_the_ID()) : null; ?>
 						<article <?php post_class('ps-plugin-card'); ?>>
 							<a class="ps-plugin-card__image-link" href="<?php the_permalink(); ?>" aria-label="<?php the_title_attribute(); ?>">
+								<span class="ps-plugin-card__free">Бесплатно</span>
 								<?php if (has_post_thumbnail()) : ?>
 									<?php the_post_thumbnail('large', ['class' => 'ps-plugin-card__image']); ?>
 								<?php else : ?>
@@ -72,9 +103,14 @@ $archive_description = 'Каталог кастомных решений и ин
 									?>
 								</div>
 
-								<a class="ps-plugin-card__button" href="<?php the_permalink(); ?>">
-									Подробнее
-								</a>
+								<div class="ps-plugin-card__footer">
+									<a class="ps-plugin-card__details" href="<?php the_permalink(); ?>">Документация →</a>
+									<?php if (!empty($plugin_archive['url'])) : ?>
+										<a class="ps-plugin-card__button" href="<?php echo esc_url($plugin_archive['url']); ?>" download>Скачать</a>
+									<?php else : ?>
+										<a class="ps-plugin-card__button" href="<?php the_permalink(); ?>#ps-plugin-downloads-title">Скачать</a>
+									<?php endif; ?>
+								</div>
 							</div>
 						</article>
 					<?php endwhile; ?>
@@ -106,6 +142,15 @@ $archive_description = 'Каталог кастомных решений и ин
 			<?php wp_reset_postdata(); ?>
 		</div>
 	</section>
+
+	<section class="ps-plugin-archive__cta">
+		<div class="container">
+			<div class="ps-plugin-archive__cta-inner">
+				<div><p>Не нашли нужного?</p><h2>Сделаю плагин под вашу задачу</h2><div>Расскажите, какого функционала не хватает. Я разберусь в задаче, предложу архитектуру и разработаю решение без лишних модулей.</div></div>
+				<a href="<?php echo esc_url($contacts_url); ?>">Обсудить задачу <span>→</span></a>
+			</div>
+		</div>
+	</section>
 </main>
 
 <style>
@@ -115,13 +160,13 @@ $archive_description = 'Каталог кастомных решений и ин
 }
 
 .ps-plugin-archive__hero {
-	padding: 56px 0 32px;
+	padding: 76px 0 64px;
 	background: #fff;
 	border-bottom: 1px solid rgba(15, 23, 42, 0.06);
 }
 
 .ps-plugin-archive__hero-inner {
-	max-width: 860px;
+	max-width: 920px;
 }
 
 .ps-plugin-archive__eyebrow {
@@ -144,6 +189,7 @@ $archive_description = 'Каталог кастомных решений и ин
 	line-height: 1.08;
 	color: #0f172a;
 }
+.ps-plugin-archive__title span { color: #4d3bfe; }
 
 .ps-plugin-archive__description {
 	font-size: 17px;
@@ -154,10 +200,28 @@ $archive_description = 'Каталог кастомных решений и ин
 .ps-plugin-archive__description p:last-child {
 	margin-bottom: 0;
 }
+.ps-plugin-archive__actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:28px; }
+.ps-plugin-archive__button { display:inline-flex; align-items:center; justify-content:center; min-height:50px; padding:0 22px; border-radius:12px; font-weight:700; text-decoration:none; }
+.ps-plugin-archive__button--primary { background:#4d3bfe; color:#fff; }
+.ps-plugin-archive__button--primary:hover { background:#3927db; color:#fff; }
+.ps-plugin-archive__button--secondary { border:1px solid #cbd5e1; color:#0f172a; background:#fff; }
+.ps-plugin-archive__trust { display:flex; flex-wrap:wrap; gap:24px; margin:28px 0 0; padding:0; list-style:none; color:#475569; font-size:14px; font-weight:600; }
+.ps-plugin-archive__trust li { position:relative; padding-left:22px; }
+.ps-plugin-archive__trust li::before { content:'✓'; position:absolute; left:0; color:#16a34a; font-weight:900; }
+.ps-plugin-archive__how { padding:64px 0; background:#0f172a; color:#fff; }
+.ps-plugin-archive__section-heading p,.ps-plugin-archive__catalog-heading p,.ps-plugin-archive__cta-inner>div>p { margin:0 0 8px; color:#8b7fff; font-size:13px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; }
+.ps-plugin-archive__section-heading h2,.ps-plugin-archive__catalog-heading h2 { margin:0; font-size:clamp(28px,3vw,38px); line-height:1.15; }
+.ps-plugin-archive__steps { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; margin-top:34px; }
+.ps-plugin-archive__step { display:flex; gap:16px; padding:22px; border:1px solid rgba(255,255,255,.1); border-radius:18px; background:rgba(255,255,255,.04); }
+.ps-plugin-archive__step>span { color:#8b7fff; font-weight:800; }
+.ps-plugin-archive__step h3 { margin:0 0 8px; color:#fff; font-size:18px; }
+.ps-plugin-archive__step p { margin:0; color:#94a3b8; line-height:1.6; font-size:14px; }
 
 .ps-plugin-archive__content {
-	padding-top: 36px;
+	padding-top: 64px;
 }
+.ps-plugin-archive__catalog-heading { display:flex; justify-content:space-between; align-items:end; gap:20px; margin-bottom:28px; }
+.ps-plugin-archive__catalog-heading>span { color:#64748b; font-size:14px; }
 
 .ps-plugin-grid {
 	display: grid;
@@ -184,11 +248,13 @@ $archive_description = 'Каталог кастомных решений и ин
 }
 
 .ps-plugin-card__image-link {
+	position: relative;
 	display: block;
 	aspect-ratio: 16 / 10;
 	background: #e2e8f0;
 	overflow: hidden;
 }
+.ps-plugin-card__free { position:absolute; z-index:2; top:14px; right:14px; padding:7px 11px; border-radius:999px; background:#dcfce7; color:#15803d; font-size:12px; font-weight:800; box-shadow:0 4px 14px rgba(15,23,42,.12); }
 
 .ps-plugin-card__image {
 	display: block;
@@ -378,6 +444,16 @@ $archive_description = 'Каталог кастомных решений и ин
 	text-decoration: none;
 	transition: background 0.25s ease, transform 0.25s ease;
 }
+.ps-plugin-card__footer { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:auto; }
+.ps-plugin-card__details { color:#475569; font-size:14px; font-weight:700; text-decoration:none; }
+.ps-plugin-card__details:hover { color:#4d3bfe; }
+.ps-plugin-card__footer .ps-plugin-card__button { margin-top:0; min-height:42px; }
+.ps-plugin-archive__cta { padding:0 0 72px; background:#f8fafc; }
+.ps-plugin-archive__cta-inner { display:flex; align-items:center; justify-content:space-between; gap:36px; padding:42px; border-radius:28px; background:linear-gradient(135deg,#4d3bfe,#312e81); color:#fff; }
+.ps-plugin-archive__cta-inner h2 { margin:0 0 12px; color:#fff; font-size:clamp(28px,3vw,40px); }
+.ps-plugin-archive__cta-inner>div>div { max-width:720px; color:#dddafa; line-height:1.7; }
+.ps-plugin-archive__cta-inner>a { flex:0 0 auto; display:inline-flex; align-items:center; gap:18px; min-height:54px; padding:0 22px; border-radius:14px; background:#fff; color:#312e81; font-weight:800; text-decoration:none; }
+.ps-plugin-archive__cta-inner>a span { font-size:22px; }
 
 .ps-plugin-card__button:hover,
 .ps-plugin-card__button:focus-visible {
@@ -437,12 +513,20 @@ $archive_description = 'Каталог кастомных решений и ин
 	.ps-plugin-grid {
 		grid-template-columns: repeat(2, minmax(0, 1fr));
 	}
+	.ps-plugin-archive__steps { grid-template-columns:1fr; }
 }
 
 @media (max-width: 767px) {
 	.ps-plugin-archive__hero {
 		padding: 40px 0 24px;
 	}
+	.ps-plugin-archive__trust { display:grid; gap:10px; }
+	.ps-plugin-archive__how { padding:44px 0; }
+	.ps-plugin-archive__catalog-heading { display:block; }
+	.ps-plugin-archive__catalog-heading>span { display:block; margin-top:10px; }
+	.ps-plugin-card__footer { align-items:stretch; flex-direction:column; }
+	.ps-plugin-archive__cta-inner { display:block; padding:28px 22px; }
+	.ps-plugin-archive__cta-inner>a { margin-top:24px; justify-content:center; }
 
 	.ps-plugin-archive__content {
 		padding-top: 24px;
