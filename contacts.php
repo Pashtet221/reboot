@@ -36,7 +36,7 @@ get_header();
           </p>
 
           <div class="ps-contact__actions">
-            <a href="https://t.me/paveldamut4@gmail.com" class="ps-contact__btn" target="_blank" rel="noopener">
+            <a href="https://t.me/wp_devstudio" class="ps-contact__btn" target="_blank" rel="noopener">
               Написать в Telegram
             </a>
 
