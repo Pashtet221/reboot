@@ -21,6 +21,18 @@ use Wpshop\Core\MetaBoxTaxonomy;
 use Wpshop\Core\Partner;
 use Wpshop\Core\ViewsCounter;
 
+/**
+ * Route messages from the theme's contact form to the public support inbox.
+ *
+ * This is registered before ContactForm is instantiated because the component
+ * resolves its recipient in the constructor.
+ */
+add_filter( 'wpshop_contact_form_email_to', 'ps_contact_form_email_to' );
+
+function ps_contact_form_email_to() {
+    return 'info@plugins-store.ru';
+}
+
 
 $vendor_directory = get_template_directory() . '/vendor';
 $composer_autoloader = $vendor_directory . '/autoload.php';

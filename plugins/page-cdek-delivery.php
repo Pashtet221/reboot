@@ -337,7 +337,7 @@ get_header();
 
             <div class="pscdCta__actions">
                 <a href="/contacts" class="pscdBtn pscdBtn--primary">Обсудить интеграцию</a>
-                <a href="mailto:plugins-store@plugins-store.ru" class="pscdBtn pscdBtn--ghost">Написать на почту</a>
+                <a href="mailto:info@plugins-store.ru" class="pscdBtn pscdBtn--ghost">Написать на почту</a>
             </div>
         </div>
     </div>

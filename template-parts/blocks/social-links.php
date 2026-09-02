@@ -46,6 +46,12 @@ if ( ! empty( $social_profile_links ) ) {
 			if ( empty($icon) || empty($link) ) {
 				continue;
 			}
+
+			// Keep the header email icon pointed at the public support inbox even
+			// when an older personal address is still stored in the ACF options.
+			if ( 0 === stripos( $link, 'mailto:' ) ) {
+				$link = 'mailto:info@plugins-store.ru';
+			}
 		?>
 			<a class="header-socials__link" href="<?php echo esc_url($link); ?>" target="_blank" rel="noopener noreferrer">
 				<i class="<?php echo esc_attr($icon); ?>" aria-hidden="true"></i>
