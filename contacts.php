@@ -40,8 +40,8 @@ get_header();
               Написать в Telegram
             </a>
 
-            <a href="mailto:paveldamut4@gmail.com" class="ps-contact__btn ps-contact__btn--secondary">
-              paveldamut4@gmail.com
+            <a href="mailto:plugins-store@plugins-store.ru" class="ps-contact__btn ps-contact__btn--secondary">
+              plugins-store@plugins-store.ru
             </a>
           </div>
         </div>
@@ -73,7 +73,7 @@ get_header();
 
         <div>
           <span>Email</span>
-          <a href="mailto:paveldamut4@gmail.com">paveldamut4@gmail.com</a>
+          <a href="mailto:plugins-store@plugins-store.ru">plugins-store@plugins-store.ru</a>
         </div>
 
         <div>

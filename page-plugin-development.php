@@ -244,7 +244,7 @@ get_header();
 
             <div class="psdevCta__actions">
                 <a href="/contacts" class="psdevBtn psdevBtn--primary">Обсудить проект</a>
-                <a href="mailto:paveldamut4@gmail.com" class="psdevBtn psdevBtn--ghost">Написать на почту</a>
+                <a href="mailto:plugins-store@plugins-store.ru" class="psdevBtn psdevBtn--ghost">Написать на почту</a>
             </div>
 
         </div>
