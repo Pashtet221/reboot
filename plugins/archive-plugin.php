@@ -108,7 +108,7 @@ $contacts_url    = home_url('/contacts/');
 									<?php if (!empty($plugin_archive['url'])) : ?>
 										<a class="ps-plugin-card__button" href="<?php echo esc_url($plugin_archive['url']); ?>" download>Скачать</a>
 									<?php else : ?>
-										<a class="ps-plugin-card__button" href="<?php the_permalink(); ?>#ps-plugin-downloads-title">Скачать</a>
+										<a class="ps-plugin-card__button" href="<?php the_permalink(); ?>">Подробнее</a>
 									<?php endif; ?>
 								</div>
 							</div>
