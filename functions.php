@@ -1742,7 +1742,30 @@ function ps_plugin_legacy_template_include($template) {
 		'page-woocommerce-one-click-order.php' => 'plugins/page-woocommerce-one-click-order.php',
 		'page-hivepress-paid-listings.php' => 'plugins/page-hivepress-paid-listings.php',
 		'page-wordpress-crm-integration.php' => 'plugins/page-wordpress-crm-integration.php',
+		'page-ajax-cart-woocommerce.php' => 'plugins/page-ajax-cart-woocommerce.php',
+		'page-short-checkout-woocommerce.php' => 'plugins/page-short-checkout-woocommerce.php',
+		'page-variation-buttons-woocommerce.php' => 'plugins/page-variation-buttons-woocommerce.php',
+		'page-free-shipping-threshold.php' => 'plugins/page-free-shipping-threshold.php',
+		'page-variation-import-woocommerce.php' => 'plugins/page-variation-import-woocommerce.php',
+		'page-modular-woocommerce-toolkit.php' => 'plugins/page-modular-woocommerce-toolkit.php',
 	];
+
+	$slug_templates = [
+		'ajax-korzina-woocommerce-bez-perezagruzki' => 'plugins/page-ajax-cart-woocommerce.php',
+		'kak-sokratit-checkout-woocommerce' => 'plugins/page-short-checkout-woocommerce.php',
+		'variacii-woocommerce-knopkami-razmery-cveta' => 'plugins/page-variation-buttons-woocommerce.php',
+		'besplatnaya-dostavka-woocommerce-ot-summy' => 'plugins/page-free-shipping-threshold.php',
+		'import-variacij-woocommerce-iz-csv-yml' => 'plugins/page-variation-import-woocommerce.php',
+		'modulnyj-woocommerce-toolkit-bez-monolita' => 'plugins/page-modular-woocommerce-toolkit.php',
+	];
+
+	$current_post = get_queried_object();
+	if ($current_post instanceof WP_Post && isset($slug_templates[$current_post->post_name])) {
+		$plugin_template = get_stylesheet_directory() . '/' . $slug_templates[$current_post->post_name];
+		if (file_exists($plugin_template)) {
+			return $plugin_template;
+		}
+	}
 
 	$selected_template = get_page_template_slug(get_queried_object_id());
 	if (isset($legacy_templates[$selected_template])) {
