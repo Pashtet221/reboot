@@ -1,0 +1,9 @@
+{
+  "name": "reboot-plugins-store",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check:capture": "node --check scripts/capture-media.mjs"
+  }
+}
