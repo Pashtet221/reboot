@@ -336,7 +336,7 @@ get_header();
 
             <div class="pscoCta__actions">
                 <a href="/contacts" class="pscoBtn pscoBtn--primary">Обсудить задачу</a>
-                <a href="mailto:plugins-store@plugins-store.ru" class="pscoBtn pscoBtn--ghost">Написать на почту</a>
+                <a href="mailto:info@plugins-store.ru" class="pscoBtn pscoBtn--ghost">Написать на почту</a>
             </div>
         </div>
     </div>

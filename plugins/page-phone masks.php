@@ -26,7 +26,7 @@ get_header();
 
                     <div class="pscdHero__actions">
                         <a href="/contacts" class="pscdBtn pscdBtn--primary">Заказать плагин</a>
-                        <a href="mailto:plugins-store@plugins-store.ru" class="pscdBtn pscdBtn--ghost">Задать вопрос</a>
+                        <a href="mailto:info@plugins-store.ru" class="pscdBtn pscdBtn--ghost">Задать вопрос</a>
                     </div>
 
                     <div class="pscdHero__trust">
@@ -414,7 +414,7 @@ get_header();
 
                 <div class="pscdCta__actions">
                     <a href="/contacts" class="pscdBtn pscdBtn--primary">Обсудить плагин</a>
-                    <a href="mailto:plugins-store@plugins-store.ru" class="pscdBtn pscdBtn--ghost">Написать на почту</a>
+                    <a href="mailto:info@plugins-store.ru" class="pscdBtn pscdBtn--ghost">Написать на почту</a>
                 </div>
             </div>
         </div>
